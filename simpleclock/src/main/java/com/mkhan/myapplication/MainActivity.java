@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void openCalendarApp(){
         //Log.d("Testing",ACCESSIBILITY_SERVICE);
-        startActivity(ClockUtility.openCalendarApp());
+        //startActivity(ClockUtility.openCalendarApp());
     }
 
 }

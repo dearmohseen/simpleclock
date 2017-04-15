@@ -19,7 +19,8 @@ import java.util.Locale;
 
     public static String getTodaysDay(){
         Calendar c = Calendar.getInstance();
-        SimpleDateFormat df = new SimpleDateFormat("EEEE, MMM d, yyyy",Locale.ENGLISH);
+        SimpleDateFormat df = new SimpleDateFormat("EEE, MMM d",Locale.ENGLISH);
+        //SimpleDateFormat df = new SimpleDateFormat("MMM d",Locale.ENGLISH);
         String formattedDate = df.format(c.getTime());
 
         return formattedDate;
