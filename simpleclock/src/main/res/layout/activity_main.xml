@@ -23,7 +23,7 @@
             style="@style/Animation.AppCompat.DropDownUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="24dp"
+            android:layout_marginLeft="32dp"
             android:layout_marginRight="32dp"
             android:fontFamily="sans-serif-light"
             android:format12Hour="hh:mm"
@@ -31,10 +31,10 @@
             android:textAlignment="textStart"
             android:textColor="@android:color/white"
             android:textSize="110sp"
-            ads:layout_constraintHorizontal_bias="0.0"
+            ads:layout_constraintHorizontal_bias="0.226"
             ads:layout_constraintLeft_toLeftOf="parent"
             ads:layout_constraintRight_toRightOf="parent"
-            android:layout_marginTop="56dp"
+            android:layout_marginTop="74dp"
             ads:layout_constraintTop_toBottomOf="@+id/adView2" />
 
         <TextClock
@@ -70,7 +70,6 @@
             android:id="@+id/textViewDay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
             android:layout_marginTop="23dp"
             android:clickable="true"
             android:fontFamily="sans-serif-light"
@@ -78,25 +77,30 @@
             android:textAlignment="viewStart"
             android:textColor="@android:color/white"
             android:textSize="40sp"
-            ads:layout_constraintLeft_toLeftOf="@+id/textClock"
             ads:layout_constraintTop_toBottomOf="@+id/textClock"
             tools:layout_constraintLeft_creator="1"
-            tools:layout_constraintTop_creator="1" />
+            tools:layout_constraintTop_creator="1"
+            android:layout_marginRight="8dp"
+            ads:layout_constraintRight_toRightOf="parent"
+            android:layout_marginLeft="8dp"
+            ads:layout_constraintLeft_toLeftOf="parent" />
 
         <TextView
             android:id="@+id/textViewDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="0dp"
+            android:layout_marginTop="-1dp"
 
             android:text="Date"
             android:textAlignment="center"
             android:textColor="@android:color/white"
             android:textSize="20sp"
-            ads:layout_constraintLeft_toLeftOf="@+id/textViewDay"
             ads:layout_constraintTop_toBottomOf="@+id/textViewDay"
             tools:layout_constraintLeft_creator="1"
-            tools:layout_constraintTop_creator="1" />
+            tools:layout_constraintTop_creator="1"
+            android:layout_marginRight="8dp"
+            ads:layout_constraintRight_toRightOf="parent"
+            android:layout_marginLeft="8dp"
+            ads:layout_constraintLeft_toLeftOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
