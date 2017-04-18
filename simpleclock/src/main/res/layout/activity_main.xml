@@ -26,17 +26,18 @@
 
         <TextClock
             android:id="@+id/textClock"
+            style="@style/Animation.AppCompat.DropDownUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="32dp"
             android:layout_marginTop="56dp"
+            android:fontFamily="sans-serif-light"
             android:format12Hour="hh:mm"
             android:text="Date"
             android:textAlignment="textStart"
             android:textColor="@android:color/white"
-            android:textSize="135sp"
-            android:textStyle="normal"
+            android:textSize="110sp"
             ads:layout_constraintHorizontal_bias="0.0"
             ads:layout_constraintLeft_toLeftOf="parent"
             ads:layout_constraintRight_toRightOf="parent"
@@ -46,8 +47,8 @@
             android:id="@+id/textClockSeconds"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="-1dp"
-            android:layout_marginTop="-2dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="24dp"
             android:format12Hour="ss"
             android:format24Hour="ss"
             android:textColor="@android:color/white"
@@ -60,49 +61,49 @@
             android:id="@+id/textClockAM"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="0dp"
-            android:layout_marginLeft="0dp"
             android:layout_marginStart="8dp"
             android:format12Hour="a"
             android:format24Hour=""
             android:textColor="@android:color/white"
             android:textSize="24sp"
             android:textStyle="normal"
+            ads:layout_constraintLeft_toRightOf="@+id/textClock"
+            android:layout_marginLeft="12dp"
             ads:layout_constraintBottom_toBottomOf="@+id/textClock"
-            ads:layout_constraintLeft_toRightOf="@+id/textClock" />
+            android:layout_marginBottom="24dp" />
 
         <TextView
             android:id="@+id/textViewDay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="23dp"
             android:clickable="true"
+            android:fontFamily="sans-serif-light"
             android:text="Saturday"
-
             android:textAlignment="viewStart"
             android:textColor="@android:color/white"
-            android:textSize="50sp"
+            android:textSize="40sp"
             ads:layout_constraintLeft_toLeftOf="@+id/textClock"
+            ads:layout_constraintTop_toBottomOf="@+id/textClock"
             tools:layout_constraintLeft_creator="1"
-            tools:layout_constraintTop_creator="1"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="8dp"
-            ads:layout_constraintTop_toBottomOf="@+id/textClock" />
+            tools:layout_constraintTop_creator="1" />
 
         <TextView
             android:id="@+id/textViewDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
+
             android:text="Date"
             android:textAlignment="center"
-
             android:textColor="@android:color/white"
-            android:textSize="28sp"
+            android:textSize="20sp"
+            ads:layout_constraintLeft_toLeftOf="@+id/textViewDay"
             ads:layout_constraintTop_toBottomOf="@+id/textViewDay"
             tools:layout_constraintLeft_creator="1"
-            tools:layout_constraintTop_creator="1"
-            android:layout_marginLeft="0dp"
-            ads:layout_constraintLeft_toLeftOf="@+id/textViewDay"
-            android:layout_marginTop="8dp" />
+            tools:layout_constraintTop_creator="1" />
 
     </android.support.constraint.ConstraintLayout>
 
