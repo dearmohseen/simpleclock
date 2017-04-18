@@ -14,13 +14,21 @@ import java.util.Locale;
  * Created by mkhan on 3/31/2017.
  */
 
+
  class ClockUtility {
 
+    private static String DATE_FORMAT = "MMM d, yyyy";
+    private static String DAY_FORMAT = "EEEE";
 
-    public static String getTodaysDay(){
+    public static String getTodaysDate(String format){
         Calendar c = Calendar.getInstance();
-        SimpleDateFormat df = new SimpleDateFormat("EEE, MMM d",Locale.ENGLISH);
-        //SimpleDateFormat df = new SimpleDateFormat("MMM d",Locale.ENGLISH);
+        SimpleDateFormat df;
+        if("day".equalsIgnoreCase(format)){
+            df = new SimpleDateFormat(DAY_FORMAT,Locale.ENGLISH);
+        } else {
+            df = new SimpleDateFormat(DATE_FORMAT,Locale.ENGLISH);
+        }
+
         String formattedDate = df.format(c.getTime());
 
         return formattedDate;

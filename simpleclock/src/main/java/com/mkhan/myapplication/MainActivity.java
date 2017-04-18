@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private TextClock textClockAM;
     private TextClock textClockSeconds;
     private TextView  textViewDate;
+    private TextView  textViewDay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
         textClock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getBaseContext(),"Opening Calendar", Toast.LENGTH_SHORT).show();
                 openCalendarApp();
             }
         });
@@ -38,14 +38,15 @@ public class MainActivity extends AppCompatActivity {
 
         textClockSeconds = (TextClock) findViewById(R.id.textClockSeconds);
 
-        //setPMTextSize();
+        textViewDay = (TextView) findViewById(R.id.textViewDay);
+        textViewDay.setText(ClockUtility.getTodaysDate("day"));
 
         textViewDate = (TextView) findViewById(R.id.textViewDate);
-        textViewDate.setText(ClockUtility.getTodaysDay());
+        textViewDate.setText(ClockUtility.getTodaysDate("date"));
         textViewDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getBaseContext(),"Opening Calendar", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getBaseContext(),"Opening Calendar", Toast.LENGTH_SHORT).show();
                 openCalendarApp();
             }
         });
@@ -62,19 +63,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void playSound(){
-        Toast.makeText(getBaseContext(),"Clicked", Toast.LENGTH_SHORT).show();
-    }
-
-    public void setPMTextSize(){
-        float size = Math.round((textClock.getTextSize()*1.1f)/3);
-        textClockAM.setTextSize(TypedValue.COMPLEX_UNIT_PX,size );
-        textClockSeconds.setTextSize(TypedValue.COMPLEX_UNIT_PX,size);
-
-    }
-
     public void openCalendarApp(){
         //Log.d("Testing",ACCESSIBILITY_SERVICE);
+        //Toast.makeText(getBaseContext(),"Opening Calendar", Toast.LENGTH_SHORT).show();
         //startActivity(ClockUtility.openCalendarApp());
     }
 
