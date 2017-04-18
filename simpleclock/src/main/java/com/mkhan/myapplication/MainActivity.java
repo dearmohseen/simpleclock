@@ -5,9 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -20,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private TextClock textClockSeconds;
     private TextView  textViewDate;
     private TextView  textViewDay;
+    ToggleButton toggleButtonSecond;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,17 @@ public class MainActivity extends AppCompatActivity {
         textClockAM = (TextClock) findViewById(R.id.textClockAM);
 
         textClockSeconds = (TextClock) findViewById(R.id.textClockSeconds);
+
+        toggleButtonSecond = (ToggleButton) findViewById(R.id.toggleButtonSeconds);
+        toggleButtonSecond.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    textClockSeconds.setVisibility(View.INVISIBLE);
+                } else {
+                    textClockSeconds.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
         textViewDay = (TextView) findViewById(R.id.textViewDay);
         textViewDay.setText(ClockUtility.getTodaysDate("day"));

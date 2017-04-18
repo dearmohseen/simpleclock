@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,11 +10,6 @@
     android:weightSum="1"
     android:baselineAligned="false"
     android:layout_weight="1">
-
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="20sp">
 
         <com.google.android.gms.ads.AdView
             android:id="@+id/adView2"
@@ -29,18 +24,20 @@
         <TextClock
             android:id="@+id/textClock"
             style="@style/Animation.AppCompat.DropDownUp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="357dp"
+            android:layout_height="180dp"
+            android:layout_marginBottom="35dp"
+            android:layout_marginLeft="16dp"
             android:fontFamily="sans-serif-light"
             android:format12Hour="hh:mm"
             android:text="Date"
             android:textAlignment="textStart"
             android:textColor="@android:color/white"
-            android:textSize="130sp"
-            android:layout_marginLeft="125dp"
-            ads:layout_constraintLeft_toLeftOf="parent"
+            android:textSize="140sp"
             ads:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="35dp" />
+            ads:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="8dp"
+            ads:layout_constraintTop_toBottomOf="@+id/adView2" />
 
         <TextClock
             android:id="@+id/textClockSeconds"
@@ -74,33 +71,53 @@
             android:id="@+id/textViewDay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="8dp"
             android:clickable="true"
             android:fontFamily="sans-serif-light"
             android:text="Saturday"
             android:textAlignment="viewStart"
             android:textColor="@android:color/white"
             android:textSize="36sp"
-            ads:layout_constraintBottom_toTopOf="@+id/textViewDate"
-            ads:layout_constraintLeft_toLeftOf="parent" />
+            android:layout_marginRight="44dp"
+            ads:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="51dp"
+            ads:layout_constraintTop_toBottomOf="@+id/adView2" />
 
         <TextView
             android:id="@+id/textViewDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:layout_marginLeft="16dp"
             android:text="Date"
             android:textAlignment="center"
             android:textColor="@android:color/white"
             android:textSize="18sp"
-            ads:layout_constraintLeft_toLeftOf="@+id/textViewDay"
-            android:layout_marginBottom="0dp"
-            ads:layout_constraintBottom_toTopOf="@+id/textClock"
-            ads:layout_constraintTop_toTopOf="@+id/textClock"
-            android:layout_marginTop="0dp" />
+            android:layout_marginTop="8dp"
+            ads:layout_constraintTop_toBottomOf="@+id/textViewDay"
+            android:layout_marginLeft="8dp"
+            ads:layout_constraintLeft_toLeftOf="@+id/textViewDay" />
 
-    </android.support.constraint.ConstraintLayout>
+        <ToggleButton
+            android:id="@+id/toggleButtonSeconds"
+            android:layout_width="110sp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="35dp"
+            android:layout_marginRight="51dp"
+            android:background="?android:attr/colorActivatedHighlight"
+            android:backgroundTint="@android:color/holo_green_light"
+            android:elevation="0dp"
+            android:fadingEdge="horizontal|vertical"
+            android:fontFamily="sans-serif"
+            android:maxLines="2"
+            android:text="Hide Seconds"
+            android:textAlignment="center"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            android:textColorHighlight="@color/common_google_signin_btn_text_dark_focused"
+            android:textOff="Hide Seconds"
+            android:textOn="Show Seconds"
+            android:textSize="18sp"
+            ads:layout_constraintBottom_toBottomOf="parent"
+            ads:layout_constraintRight_toRightOf="parent"
+            tools:textColor="@android:color/background_dark" />
 
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>
