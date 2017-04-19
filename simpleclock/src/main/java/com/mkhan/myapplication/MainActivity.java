@@ -66,13 +66,13 @@ public class MainActivity extends AppCompatActivity {
 
         MobileAds.initialize(getApplicationContext(), "ca-app-pub-1322448895447717/9531904783");
         AdView mAdView = (AdView) findViewById(R.id.adView2);
-        mAdView.setVisibility(View.INVISIBLE);
+        //mAdView.setVisibility(View.INVISIBLE);
 
         Bundle extras = new Bundle();
         extras.putBoolean("is_designed_for_families", true);
 
         AdRequest adRequest = new AdRequest.Builder().build();
-        adRequest.isTestDevice(this);
+        //adRequest.isTestDevice(this);
         mAdView.loadAd(adRequest);
 
     }
