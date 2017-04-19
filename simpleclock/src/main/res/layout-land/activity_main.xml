@@ -8,18 +8,20 @@
     android:orientation="vertical"
     tools:context="com.mkhan.myapplication.MainActivity"
     android:weightSum="1"
+    android:id="@+id/topMostLayout"
+    android:tag="land-normal"
     android:baselineAligned="false"
     android:layout_weight="1">
 
         <com.google.android.gms.ads.AdView
-            android:id="@+id/adView2"
+            android:id="@+id/adView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="8dp"
             ads:adSize="BANNER"
-            ads:adUnitId="@string/banner_ad_unit_id"
-            ads:layout_constraintRight_toRightOf="parent"
-            tools:layout_editor_absoluteY="0dp" />
+            ads:adUnitId="@string/banner_ad_unit_id_1"
+            tools:layout_editor_absoluteY="0dp"
+            android:layout_marginRight="8dp"
+            ads:layout_constraintRight_toRightOf="parent" />
 
         <TextClock
             android:id="@+id/textClock"
@@ -29,7 +31,6 @@
             android:layout_marginBottom="35dp"
             android:layout_marginLeft="153dp"
             android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp"
             android:fontFamily="sans-serif-light"
             android:format12Hour="hh:mm"
             android:text="Date"
@@ -39,9 +40,7 @@
             ads:layout_constraintBottom_toBottomOf="parent"
             ads:layout_constraintHorizontal_bias="0.295"
             ads:layout_constraintLeft_toLeftOf="parent"
-            ads:layout_constraintRight_toRightOf="parent"
-            ads:layout_constraintTop_toBottomOf="@+id/adView2"
-            ads:layout_constraintVertical_bias="1.0" />
+            ads:layout_constraintRight_toRightOf="parent" />
 
         <TextClock
             android:id="@+id/textClockSeconds"

@@ -45,12 +45,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String size = config.screenWidthDp + " : " +config.screenHeightDp;
+                String size = (String)findViewById(R.id.topMostLayout).getTag();
 
-                /*Toast toast = Toast.makeText(getBaseContext(),size, Toast.LENGTH_SHORT);
-                toast.show();*/
+                Toast toast = Toast.makeText(getBaseContext(),size, Toast.LENGTH_SHORT);
+                toast.show();
 
-                System.out.println("Mohseen : Size " + config.screenWidthDp + " : " +config.screenHeightDp + " : " + config.orientation);
+//                setTextSizes();
+                System.out.println("Mohseen : Size " + config.screenWidthDp + " : " +config.screenHeightDp + " : " + findViewById(R.id.topMostLayout).getTag());
                 //openCalendarApp();
             }
         });
@@ -71,24 +72,25 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        MobileAds.initialize(getApplicationContext(), "ca-app-pub-1322448895447717/9531904783");
-        AdView mAdView = (AdView) findViewById(R.id.adView2);
+        MobileAds.initialize(getApplicationContext(), getResources().getString(R.string.banner_ad_unit_id_1));
+        AdView mAdView1 = (AdView) findViewById(R.id.adView1);
         //mAdView.setVisibility(View.INVISIBLE);
 
         Bundle extras = new Bundle();
         extras.putBoolean("is_designed_for_families", true);
 
         AdRequest adRequest = new AdRequest.Builder().build();
-        //adRequest.isTestDevice(this);
-        mAdView.loadAd(adRequest);
+        adRequest.isTestDevice(this);
+        mAdView1.loadAd(adRequest);
 
-        setTextSizes();
+        //setTextSizes();
 
     }
 
     public void setTextSizes(){
         System.out.println("Mohseen : 1 " + width + " : " +height);
 
+        //Horizontal = 1
         if(config.orientation == 1) {
 
             if (width < 350) {
@@ -136,23 +138,29 @@ public class MainActivity extends AppCompatActivity {
                 textViewDay.setTextSize(32);
                 textViewDate.setTextSize(18);
             } else if (width >= 450 && width < 600) {
-                textClock.setTextSize(130);
+                textClock.setTextSize(120);
                 textClockAM.setTextSize(28);
                 textClockSeconds.setTextSize(28);
-                textViewDay.setTextSize(36);
+                textViewDay.setTextSize(32);
                 textViewDate.setTextSize(20);
-            } else if (width >= 600 && width < 750) {
-                textClock.setTextSize(200);
+            } else if (width >= 600 && width < 700) {
+                textClock.setTextSize(150);
                 textClockAM.setTextSize(30);
                 textClockSeconds.setTextSize(30);
-                textViewDay.setTextSize(60);
-                textViewDate.setTextSize(30);
-            } else if (width > 750) {
+                textViewDay.setTextSize(40);
+                textViewDate.setTextSize(24);
+            } else if (width >= 700 && width < 800 ) {
                 textClockAM.setTextSize(40);
                 textClockSeconds.setTextSize(40);
                 textClock.setTextSize(200);
                 textViewDay.setTextSize(52);
                 textViewDate.setTextSize(28);
+            } else if (width >= 800 ) {
+                textClockAM.setTextSize(50);
+                textClockSeconds.setTextSize(50);
+                textClock.setTextSize(300);
+                textViewDay.setTextSize(70);
+                textViewDate.setTextSize(35);
             }
         }
     }
