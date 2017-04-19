@@ -15,11 +15,11 @@
             android:id="@+id/adView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
             ads:adSize="BANNER"
             ads:adUnitId="@string/banner_ad_unit_id"
-            tools:layout_editor_absoluteY="0dp"
-            android:layout_marginRight="8dp"
-            ads:layout_constraintRight_toRightOf="parent" />
+            ads:layout_constraintRight_toRightOf="parent"
+            tools:layout_editor_absoluteY="0dp" />
 
         <TextClock
             android:id="@+id/textClock"
@@ -27,7 +27,7 @@
             android:layout_width="357dp"
             android:layout_height="180dp"
             android:layout_marginBottom="35dp"
-            android:layout_marginLeft="16dp"
+            android:layout_marginLeft="153dp"
             android:fontFamily="sans-serif-light"
             android:format12Hour="hh:mm"
             android:text="Date"
@@ -37,7 +37,8 @@
             ads:layout_constraintBottom_toBottomOf="parent"
             ads:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginTop="8dp"
-            ads:layout_constraintTop_toBottomOf="@+id/adView2" />
+            ads:layout_constraintTop_toBottomOf="@+id/adView2"
+            ads:layout_constraintVertical_bias="1.0" />
 
         <TextClock
             android:id="@+id/textClockSeconds"
@@ -77,10 +78,10 @@
             android:textAlignment="viewStart"
             android:textColor="@android:color/white"
             android:textSize="36sp"
-            android:layout_marginRight="44dp"
+            android:layout_marginRight="436dp"
             ads:layout_constraintRight_toRightOf="parent"
-            android:layout_marginTop="51dp"
-            ads:layout_constraintTop_toBottomOf="@+id/adView2" />
+            ads:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="37dp" />
 
         <TextView
             android:id="@+id/textViewDate"
@@ -95,29 +96,5 @@
             ads:layout_constraintTop_toBottomOf="@+id/textViewDay"
             android:layout_marginLeft="8dp"
             ads:layout_constraintLeft_toLeftOf="@+id/textViewDay" />
-
-        <ToggleButton
-            android:id="@+id/toggleButtonSeconds"
-            android:layout_width="110sp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="35dp"
-            android:layout_marginRight="51dp"
-            android:background="?android:attr/colorActivatedHighlight"
-            android:backgroundTint="@android:color/holo_green_light"
-            android:elevation="0dp"
-            android:fadingEdge="horizontal|vertical"
-            android:fontFamily="sans-serif"
-            android:maxLines="2"
-            android:text="Hide Seconds"
-            android:textAlignment="center"
-            android:textColor="@color/common_google_signin_btn_text_dark_focused"
-            android:textColorHighlight="@color/common_google_signin_btn_text_dark_focused"
-            android:textOff="Hide Seconds"
-            android:textOn="Show Seconds"
-            android:textSize="18sp"
-            ads:layout_constraintBottom_toBottomOf="parent"
-            ads:layout_constraintRight_toRightOf="parent"
-            tools:textColor="@android:color/background_dark" />
 
 </android.support.constraint.ConstraintLayout>

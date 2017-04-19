@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         textClockSeconds = (TextClock) findViewById(R.id.textClockSeconds);
 
-        toggleButtonSecond = (ToggleButton) findViewById(R.id.toggleButtonSeconds);
+        /*toggleButtonSecond = (ToggleButton) findViewById(R.id.toggleButtonSeconds);
         toggleButtonSecond.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                     textClockSeconds.setVisibility(View.VISIBLE);
                 }
             }
-        });
+        });*/
 
         textViewDay = (TextView) findViewById(R.id.textViewDay);
         textViewDay.setText(ClockUtility.getTodaysDate("day"));
@@ -60,13 +60,13 @@ public class MainActivity extends AppCompatActivity {
         textViewDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(getBaseContext(),"Opening Calendar", Toast.LENGTH_SHORT).show();
                 openCalendarApp();
             }
         });
 
         MobileAds.initialize(getApplicationContext(), "ca-app-pub-1322448895447717/9531904783");
         AdView mAdView = (AdView) findViewById(R.id.adView2);
+        mAdView.setVisibility(View.INVISIBLE);
 
         Bundle extras = new Bundle();
         extras.putBoolean("is_designed_for_families", true);

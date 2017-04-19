@@ -23,22 +23,22 @@
             style="@style/Animation.AppCompat.DropDownUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:layout_marginLeft="32dp"
             android:layout_marginRight="32dp"
+            android:layout_marginTop="32dp"
             android:fontFamily="sans-serif-light"
             android:format12Hour="hh:mm"
             android:text="Date"
             android:textAlignment="textStart"
             android:textColor="@android:color/white"
-            android:textSize="110sp"
-            ads:layout_constraintHorizontal_bias="0.275"
+            android:textSize="120sp"
+            ads:layout_constraintBottom_toBottomOf="parent"
+            ads:layout_constraintHorizontal_bias="0.172"
             ads:layout_constraintLeft_toLeftOf="parent"
             ads:layout_constraintRight_toRightOf="parent"
-            android:layout_marginTop="60dp"
             ads:layout_constraintTop_toBottomOf="@+id/adView2"
-            ads:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="8dp"
-            ads:layout_constraintVertical_bias="0.112" />
+            ads:layout_constraintVertical_bias="0.232" />
 
         <TextClock
             android:id="@+id/textClockSeconds"
@@ -73,7 +73,7 @@
             android:id="@+id/textViewDay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="23dp"
+            android:layout_marginTop="37dp"
             android:clickable="true"
             android:fontFamily="sans-serif-light"
             android:text="Saturday"
@@ -105,29 +105,5 @@
             ads:layout_constraintRight_toRightOf="parent"
             android:layout_marginLeft="8dp"
             ads:layout_constraintLeft_toLeftOf="parent" />
-
-    <ToggleButton
-        android:id="@+id/toggleButtonSeconds"
-        android:layout_width="110sp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="32dp"
-        android:layout_marginRight="24dp"
-        android:background="?android:attr/colorActivatedHighlight"
-        android:backgroundTint="@android:color/holo_green_light"
-        android:elevation="0dp"
-        android:fadingEdge="horizontal|vertical"
-        android:fontFamily="sans-serif"
-        android:maxLines="2"
-        android:text="Hide Seconds"
-        android:textAlignment="center"
-        android:textColor="@color/common_google_signin_btn_text_dark_focused"
-        android:textColorHighlight="@color/common_google_signin_btn_text_dark_focused"
-        android:textOff="Hide Seconds"
-        android:textOn="Show Seconds"
-        android:textSize="18sp"
-        ads:layout_constraintBottom_toBottomOf="parent"
-        ads:layout_constraintRight_toRightOf="parent"
-        tools:textColor="@android:color/background_dark" />
 
 </android.support.constraint.ConstraintLayout>
