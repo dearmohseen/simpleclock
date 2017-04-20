@@ -46,14 +46,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String size = (String)findViewById(R.id.topMostLayout).getTag();
-
-                Toast toast = Toast.makeText(getBaseContext(),config.screenWidthDp + " : " +config.screenHeightDp + " : " + tag, Toast.LENGTH_SHORT);
+                /*String size = (String)findViewById(R.id.topMostLayout).getTag();
+                String messgae = config.screenWidthDp + " : " +config.screenHeightDp + " : " + tag;
+                Toast toast = Toast.makeText(getBaseContext(),message, Toast.LENGTH_SHORT);
                 toast.show();
-
+                */
                 //setTextSizes();
                 //System.out.println("Mohseen On Click : Size " + config.screenWidthDp + " : " +config.screenHeightDp + " : " + tag);
-                //openCalendarApp();
+                openCalendarApp();
             }
         });
 
@@ -91,7 +91,6 @@ public class MainActivity extends AppCompatActivity {
     public void setTextSizes(){
         //System.out.println("Mohseen : setTextSizes " + width + " : " +height);
 
-        //Horizontal = 1
         if(config.orientation == 1) {
 
             if(tag.equalsIgnoreCase("normal")){
@@ -147,8 +146,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void openCalendarApp(){
         //Log.d("Testing",ACCESSIBILITY_SERVICE);
-        //Toast.makeText(getBaseContext(),"Opening Calendar", Toast.LENGTH_SHORT).show();
-        //startActivity(ClockUtility.openCalendarApp());
+        Toast.makeText(getBaseContext(),"Opening Calendar", Toast.LENGTH_SHORT).show();
+        startActivity(ClockUtility.openCalendarApp());
     }
 
 }
