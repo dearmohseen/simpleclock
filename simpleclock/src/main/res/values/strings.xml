@@ -4,4 +4,6 @@
     <string name="banner_ad_unit_id_2">ca-app-pub-1322448895447717/7203573588</string>
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
+    <string name="date_constant">Date</string>
+    <string name="saturday">Saturday</string>
 </resources>

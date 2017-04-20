@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="textClock_textSize">180dp</dimen>
-    <dimen name="textClockSec_textSize">40dp</dimen>
-    <dimen name="textClockAM_textSize">40dp</dimen>
-    <dimen name="textClockDay_textSize">60dp</dimen>
-    <dimen name="textClockDate_textSize">40dp</dimen>
+    <dimen name="textClock_textSize">180sp</dimen>
+    <dimen name="textClockSec_textSize">40sp</dimen>
+    <dimen name="textClockAM_textSize">40sp</dimen>
+    <dimen name="textClockDay_textSize">60sp</dimen>
+    <dimen name="textClockDate_textSize">40sp</dimen>
 </resources>
