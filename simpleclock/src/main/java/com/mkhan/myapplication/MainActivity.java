@@ -24,9 +24,10 @@ public class MainActivity extends AppCompatActivity {
     private TextClock textClockSeconds;
     private TextView  textViewDate;
     private TextView  textViewDay;
-    ToggleButton toggleButtonSecond;
-    Configuration config;
-    int width , height;
+    private ToggleButton toggleButtonSecond;
+    private Configuration config;
+    private int width , height;
+    private String tag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +37,9 @@ public class MainActivity extends AppCompatActivity {
         config = getResources().getConfiguration();
         width = config.screenWidthDp;
         height = config.screenHeightDp;
+        tag = (String)findViewById(R.id.topMostLayout).getTag();
 
         textClock = (TextClock) findViewById(R.id.textClock);
-
 
         //textClock.setTextSize();
         textClock.setOnClickListener(new View.OnClickListener() {
@@ -47,11 +48,11 @@ public class MainActivity extends AppCompatActivity {
 
                 String size = (String)findViewById(R.id.topMostLayout).getTag();
 
-                Toast toast = Toast.makeText(getBaseContext(),size, Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(getBaseContext(),config.screenWidthDp + " : " +config.screenHeightDp + " : " + tag, Toast.LENGTH_SHORT);
                 toast.show();
 
-//                setTextSizes();
-                System.out.println("Mohseen : Size " + config.screenWidthDp + " : " +config.screenHeightDp + " : " + findViewById(R.id.topMostLayout).getTag());
+                //setTextSizes();
+                //System.out.println("Mohseen On Click : Size " + config.screenWidthDp + " : " +config.screenHeightDp + " : " + tag);
                 //openCalendarApp();
             }
         });
@@ -74,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
         MobileAds.initialize(getApplicationContext(), getResources().getString(R.string.banner_ad_unit_id_1));
         AdView mAdView1 = (AdView) findViewById(R.id.adView1);
-        //mAdView.setVisibility(View.INVISIBLE);
+        mAdView1.setVisibility(View.INVISIBLE);
 
         Bundle extras = new Bundle();
         extras.putBoolean("is_designed_for_families", true);
@@ -83,49 +84,28 @@ public class MainActivity extends AppCompatActivity {
         adRequest.isTestDevice(this);
         mAdView1.loadAd(adRequest);
 
-        //setTextSizes();
+        setTextSizes();
 
     }
 
     public void setTextSizes(){
-        System.out.println("Mohseen : 1 " + width + " : " +height);
+        //System.out.println("Mohseen : setTextSizes " + width + " : " +height);
 
         //Horizontal = 1
         if(config.orientation == 1) {
 
-            if (width < 350) {
-                textClock.setTextSize(90);
-                textClockAM.setTextSize(18);
-                textClockSeconds.setTextSize(18);
-                textViewDay.setTextSize(24);
-                textViewDate.setTextSize(18);
-            } else if (width >= 350 && width < 450) {
-                textClock.setTextSize(110);
-                textClockAM.setTextSize(24);
-                textClockSeconds.setTextSize(24);
-                textViewDay.setTextSize(32);
-                textViewDate.setTextSize(18);
-            } else if (width >= 450 && width < 600) {
-                textClock.setTextSize(130);
-                textClockAM.setTextSize(28);
-                textClockSeconds.setTextSize(28);
-                textViewDay.setTextSize(50);
-                textViewDate.setTextSize(28);
-            } else if (width >= 600 && width < 750) {
-                textClock.setTextSize(200);
-                textClockAM.setTextSize(30);
-                textClockSeconds.setTextSize(30);
-                textViewDay.setTextSize(60);
-                textViewDate.setTextSize(30);
-            } else if (width > 750) {
-                textClockAM.setTextSize(40);
-                textClockSeconds.setTextSize(40);
-                textClock.setTextSize(260);
-                textViewDay.setTextSize(80);
-                textViewDate.setTextSize(40);
+            if(tag.equalsIgnoreCase("normal")){
+                if(width > 375) {
+                    textClock.setTextSize(130);
+                    textViewDay.setTextSize(44);
+                    textClockAM.setTextSize(28);
+                    textClockSeconds.setTextSize(28);
+                    textViewDate.setTextSize(24);
+                }
             }
+
         } else {
-            if (width < 350) {
+            /*if (width < 350) {
                 textClock.setTextSize(90);
                 textClockAM.setTextSize(18);
                 textClockSeconds.setTextSize(18);
@@ -161,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
                 textClock.setTextSize(300);
                 textViewDay.setTextSize(70);
                 textViewDate.setTextSize(35);
-            }
+            }*/
         }
     }
 
