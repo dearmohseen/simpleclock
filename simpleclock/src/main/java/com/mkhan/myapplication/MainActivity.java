@@ -46,14 +46,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String size = (String)findViewById(R.id.topMostLayout).getTag();
+                /*String size = (String)findViewById(R.id.topMostLayout).getTag();
                 String message = config.screenWidthDp + " : " +config.screenHeightDp + " : " + tag;
                 Toast toast = Toast.makeText(getBaseContext(),message, Toast.LENGTH_SHORT);
-                toast.show();
+                toast.show();*/
 
                 //setTextSizes();
-                System.out.println("Mohseen On Click : Size " + config.screenWidthDp + " : " +config.screenHeightDp + " : " + tag);
-                //openCalendarApp();
+             //   System.out.println("Mohseen On Click : Size " + config.screenWidthDp + " : " +config.screenHeightDp + " : " + tag);
+                openCalendarApp();
             }
         });
 
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
         MobileAds.initialize(getApplicationContext(), getResources().getString(R.string.banner_ad_unit_id_1));
         AdView mAdView1 = (AdView) findViewById(R.id.adView1);
-        //mAdView1.setVisibility(View.INVISIBLE);
+        mAdView1.setVisibility(View.INVISIBLE);
 
         Bundle extras = new Bundle();
         extras.putBoolean("is_designed_for_families", true);
