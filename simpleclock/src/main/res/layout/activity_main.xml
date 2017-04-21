@@ -105,7 +105,6 @@
         android:layout_marginBottom="8dp"
         android:layout_marginRight="8dp"
         ads:layout_constraintRight_toRightOf="@+id/constraintLayout"
-        android:id="@+id/constraintLayout2"
         android:layout_marginLeft="8dp"
         ads:layout_constraintLeft_toLeftOf="@+id/constraintLayout"
         ads:layout_constraintHorizontal_bias="0.504"
@@ -128,11 +127,8 @@
             android:textSize="@dimen/textClockDay_textSize"
             android:typeface="normal"
             ads:layout_constraintHorizontal_bias="0.521"
-            ads:layout_constraintLeft_toLeftOf="@+id/constraintLayout"
-            ads:layout_constraintRight_toRightOf="@+id/constraintLayout"
             ads:layout_constraintTop_toTopOf="parent"
-            tools:layout_constraintLeft_creator="1"
-            tools:layout_constraintTop_creator="1" />
+            />
 
         <TextView
             android:id="@+id/textViewDate"

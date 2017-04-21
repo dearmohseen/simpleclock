@@ -46,14 +46,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                /*String size = (String)findViewById(R.id.topMostLayout).getTag();
-                String messgae = config.screenWidthDp + " : " +config.screenHeightDp + " : " + tag;
+                String size = (String)findViewById(R.id.topMostLayout).getTag();
+                String message = config.screenWidthDp + " : " +config.screenHeightDp + " : " + tag;
                 Toast toast = Toast.makeText(getBaseContext(),message, Toast.LENGTH_SHORT);
                 toast.show();
-                */
+
                 //setTextSizes();
-                //System.out.println("Mohseen On Click : Size " + config.screenWidthDp + " : " +config.screenHeightDp + " : " + tag);
-                openCalendarApp();
+                System.out.println("Mohseen On Click : Size " + config.screenWidthDp + " : " +config.screenHeightDp + " : " + tag);
+                //openCalendarApp();
             }
         });
 
@@ -103,8 +103,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
-        } else {
-            /*if (width < 350) {
+        } /*else {
+            if (width < 350) {
                 textClock.setTextSize(90);
                 textClockAM.setTextSize(18);
                 textClockSeconds.setTextSize(18);
@@ -140,8 +140,8 @@ public class MainActivity extends AppCompatActivity {
                 textClock.setTextSize(300);
                 textViewDay.setTextSize(70);
                 textViewDate.setTextSize(35);
-            }*/
-        }
+            }
+        }*/
     }
 
     public void openCalendarApp(){
