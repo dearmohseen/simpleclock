@@ -136,8 +136,8 @@ public class MainActivity extends AppCompatActivity {
         batteryStatus = getBaseContext().registerReceiver(this.mBatInfoReceiver, batteryFilter);
 
         int level = batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
-        int scale = batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
-        float batteryPct = level / (float)scale;
+        /*int scale = batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+        float batteryPct = level / (float)scale;*/
 
 
         batteryText = (TextView) findViewById(R.id.batteryText);

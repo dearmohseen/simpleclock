@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="textClock_textSize">80sp</dimen>
+    <dimen name="textClockSec_textSize">20sp</dimen>
+    <dimen name="textClockAM_textSize">20sp</dimen>
+    <dimen name="textClockDay_textSize">28sp</dimen>
+    <dimen name="textClockDate_textSize">18sp</dimen>
+    <dimen name="batteryText_textSize">18sp</dimen>
+    <dimen name="constLayout_Day">153dp</dimen>
+</resources>
