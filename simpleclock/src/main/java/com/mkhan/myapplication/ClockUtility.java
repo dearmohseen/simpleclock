@@ -2,6 +2,7 @@ package com.mkhan.myapplication;
 
 import android.content.ContentUris;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.provider.CalendarContract;
 
@@ -42,6 +43,5 @@ import java.util.Locale;
                 .setData(builder.build());
         return  intent;
     }
-
 
 }

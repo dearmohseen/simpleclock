@@ -1,6 +1,11 @@
 package com.mkhan.myapplication;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Configuration;
+import android.os.BatteryManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -28,6 +33,19 @@ public class MainActivity extends AppCompatActivity {
     private Configuration config;
     private int width , height;
     private String tag;
+    IntentFilter batteryFilter;
+    Intent batteryStatus;
+    private TextView  batteryText;
+
+    private BroadcastReceiver mBatInfoReceiver = new BroadcastReceiver(){
+        @Override
+        public void onReceive(Context ctxt, Intent intent) {
+            int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
+            batteryText.setText("Battery : " + String.valueOf(level) + " %");
+        }
+    }; 
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
         MobileAds.initialize(getApplicationContext(), getResources().getString(R.string.banner_ad_unit_id_1));
         AdView mAdView1 = (AdView) findViewById(R.id.adView1);
-        mAdView1.setVisibility(View.INVISIBLE);
+        //mAdView1.setVisibility(View.INVISIBLE);
 
         Bundle extras = new Bundle();
         extras.putBoolean("is_designed_for_families", true);
@@ -86,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
 
         setTextSizes();
 
+        initializeBattery();
     }
 
     public void setTextSizes(){
@@ -103,45 +122,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
-        } /*else {
-            if (width < 350) {
-                textClock.setTextSize(90);
-                textClockAM.setTextSize(18);
-                textClockSeconds.setTextSize(18);
-                textViewDay.setTextSize(24);
-                textViewDate.setTextSize(18);
-            } else if (width >= 350 && width < 450) {
-                textClock.setTextSize(110);
-                textClockAM.setTextSize(24);
-                textClockSeconds.setTextSize(24);
-                textViewDay.setTextSize(32);
-                textViewDate.setTextSize(18);
-            } else if (width >= 450 && width < 600) {
-                textClock.setTextSize(120);
-                textClockAM.setTextSize(28);
-                textClockSeconds.setTextSize(28);
-                textViewDay.setTextSize(32);
-                textViewDate.setTextSize(20);
-            } else if (width >= 600 && width < 700) {
-                textClock.setTextSize(150);
-                textClockAM.setTextSize(30);
-                textClockSeconds.setTextSize(30);
-                textViewDay.setTextSize(40);
-                textViewDate.setTextSize(24);
-            } else if (width >= 700 && width < 800 ) {
-                textClockAM.setTextSize(40);
-                textClockSeconds.setTextSize(40);
-                textClock.setTextSize(200);
-                textViewDay.setTextSize(52);
-                textViewDate.setTextSize(28);
-            } else if (width >= 800 ) {
-                textClockAM.setTextSize(50);
-                textClockSeconds.setTextSize(50);
-                textClock.setTextSize(300);
-                textViewDay.setTextSize(70);
-                textViewDate.setTextSize(35);
-            }
-        }*/
+        }
     }
 
     public void openCalendarApp(){
@@ -150,4 +131,21 @@ public class MainActivity extends AppCompatActivity {
         startActivity(ClockUtility.openCalendarApp());
     }
 
+    private void initializeBattery(){
+        batteryFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+        batteryStatus = getBaseContext().registerReceiver(this.mBatInfoReceiver, batteryFilter);
+
+        int level = batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+        int scale = batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+        float batteryPct = level / (float)scale;
+
+
+        batteryText = (TextView) findViewById(R.id.batteryText);
+        batteryText.setText("Battery : " + String.valueOf(level) + " %");
+        //this.registerReceiver(this.mBatInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+    }
+
+
 }
+
+

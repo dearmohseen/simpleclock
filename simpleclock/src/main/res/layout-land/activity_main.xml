@@ -9,31 +9,29 @@
     tools:context="com.mkhan.myapplication.MainActivity"
     android:weightSum="1"
     android:id="@+id/topMostLayout"
-    android:tag="land-normal"
+    android:tag="land-xlarge"
     android:baselineAligned="false"
     android:layout_weight="1">
 
-        <com.google.android.gms.ads.AdView
-            android:id="@+id/adView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            ads:adSize="BANNER"
-            ads:adUnitId="@string/banner_ad_unit_id_1"
-            android:layout_marginRight="8dp"
-            ads:layout_constraintRight_toRightOf="parent"
-            tools:layout_constraintTop_creator="1"
-            android:layout_marginEnd="8dp"
-            ads:layout_constraintTop_toTopOf="parent" />
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id_1"
+        android:layout_marginRight="8dp"
+        ads:layout_constraintRight_toRightOf="parent"
+        tools:layout_constraintTop_creator="1"
+        android:layout_marginEnd="8dp"
+        ads:layout_constraintTop_toTopOf="parent" />
 
     <TextClock
         android:id="@+id/textClock"
         style="@style/Animation.AppCompat.DropDownUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="35dp"
+        android:layout_marginBottom="16dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginLeft="153dp"
-        android:layout_marginRight="8dp"
         android:layout_marginStart="153dp"
         android:fontFamily="serif"
         android:format12Hour="hh:mm"
@@ -43,9 +41,11 @@
         android:textSize="@dimen/textClock_textSize"
         android:typeface="normal"
         ads:layout_constraintBottom_toBottomOf="parent"
-        ads:layout_constraintHorizontal_bias="0.295"
+        android:layout_marginLeft="32dp"
         ads:layout_constraintLeft_toLeftOf="parent"
-        ads:layout_constraintRight_toRightOf="parent" />
+        android:layout_marginRight="8dp"
+        ads:layout_constraintRight_toRightOf="parent"
+        ads:layout_constraintHorizontal_bias="0.516" />
 
     <TextClock
         android:id="@+id/textClockSeconds"
@@ -84,7 +84,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="32dp"
         android:clickable="true"
         android:fontFamily="serif"
         android:text="@string/saturday"
@@ -92,24 +92,41 @@
         android:textColor="@android:color/white"
         android:textSize="@dimen/textClockDay_textSize"
         ads:layout_constraintLeft_toLeftOf="parent"
-        ads:layout_constraintTop_toTopOf="parent" />
+        ads:layout_constraintTop_toTopOf="parent"
+        ads:layout_constraintRight_toLeftOf="@+id/textClock"
+        android:layout_marginRight="8dp"
+        ads:layout_constraintHorizontal_bias="0.277"
+        android:layout_marginBottom="8dp"
+        ads:layout_constraintBottom_toTopOf="@+id/textClock"
+        ads:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/textViewDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="0dp"
         android:fontFamily="serif"
         android:text="@string/date_constant"
         android:textColor="@android:color/white"
         android:textSize="@dimen/textClockDate_textSize"
         android:typeface="normal"
-        ads:layout_constraintHorizontal_bias="0.544"
-        ads:layout_constraintLeft_toLeftOf="@+id/textViewDay"
-        ads:layout_constraintRight_toRightOf="@+id/textViewDay"
-        ads:layout_constraintTop_toBottomOf="@+id/textViewDay" />
+        android:layout_marginTop="8dp"
+        ads:layout_constraintTop_toBottomOf="@+id/textViewDay"
+        android:layout_marginLeft="8dp"
+        ads:layout_constraintLeft_toLeftOf="@+id/textViewDay" />
+
+    <TextView
+        android:id="@+id/batteryText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="serif"
+        android:text="Battery : 100 %"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/batteryText_textSize"
+        android:typeface="normal"
+        ads:layout_constraintTop_toTopOf="@+id/textViewDay"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="16dp"
+        ads:layout_constraintRight_toRightOf="@+id/textClock" />
 
 </android.support.constraint.ConstraintLayout>

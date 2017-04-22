@@ -97,28 +97,25 @@
         ads:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
     <android.support.constraint.ConstraintLayout
-        android:layout_width="153dp"
+        android:layout_width="@dimen/constLayout_Day"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginTop="0dp"
         ads:layout_constraintBottom_toBottomOf="parent"
-        ads:layout_constraintHorizontal_bias="0.507"
-        ads:layout_constraintLeft_toLeftOf="@+id/constraintLayout"
-        ads:layout_constraintRight_toRightOf="@+id/constraintLayout"
         ads:layout_constraintTop_toBottomOf="@+id/textClockAM"
-        ads:layout_constraintVertical_bias="0.434">
+        ads:layout_constraintVertical_bias="0.241"
+        android:layout_marginLeft="0dp"
+        ads:layout_constraintLeft_toLeftOf="@+id/constraintLayout"
+        android:id="@+id/constraintLayout2">
 
         <TextView
             android:id="@+id/textViewDay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginLeft="0dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="0dp"
             android:clickable="true"
             android:fontFamily="serif"
             android:text="@string/saturday"
@@ -127,7 +124,6 @@
             android:textSize="@dimen/textClockDay_textSize"
             android:typeface="normal"
             ads:layout_constraintLeft_toLeftOf="parent"
-            ads:layout_constraintRight_toRightOf="parent"
             ads:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -136,8 +132,6 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="0dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="0dp"
             android:fontFamily="serif"
@@ -147,9 +141,26 @@
             android:textSize="@dimen/textClockDate_textSize"
             android:typeface="normal"
             ads:layout_constraintBottom_toBottomOf="parent"
-            ads:layout_constraintLeft_toLeftOf="@+id/textViewDay"
-            ads:layout_constraintRight_toRightOf="@+id/textViewDay"
-            ads:layout_constraintTop_toBottomOf="@+id/textViewDay" />
+            ads:layout_constraintTop_toBottomOf="@+id/textViewDay"
+            ads:layout_constraintVertical_bias="0.0"
+            android:layout_marginLeft="8dp"
+            ads:layout_constraintLeft_toLeftOf="parent" />
+
+
     </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/batteryText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:layout_marginRight="8dp"
+        android:fontFamily="serif"
+        android:text="Battery : 100 %"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/batteryText_textSize"
+        android:typeface="normal"
+        ads:layout_constraintBottom_toBottomOf="parent"
+        ads:layout_constraintRight_toRightOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
