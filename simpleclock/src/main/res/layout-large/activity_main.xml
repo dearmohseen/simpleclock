@@ -143,15 +143,13 @@
 
     <ImageView
         android:id="@+id/batteryImage"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:visibility="visible"
         ads:layout_constraintBottom_toBottomOf="@+id/batteryText"
         ads:layout_constraintRight_toLeftOf="@+id/batteryText"
-        ads:layout_constraintTop_toTopOf="@+id/batteryText" />
+        ads:layout_constraintTop_toTopOf="@+id/batteryText"
+        />
 
     <TextView
         android:id="@+id/batteryText"
@@ -167,5 +165,19 @@
         ads:layout_constraintBottom_toBottomOf="parent"
         ads:layout_constraintRight_toRightOf="parent"
         android:layout_marginEnd="8dp" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline"
+        ads:layout_constraintGuide_begin="20dp"
+        android:orientation="vertical" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline3"
+        ads:layout_constraintGuide_begin="20dp"
+        android:orientation="horizontal" />
 
 </android.support.constraint.ConstraintLayout>

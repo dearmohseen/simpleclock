@@ -149,6 +149,15 @@
 
     </android.support.constraint.ConstraintLayout>
 
+    <ImageView
+        android:id="@+id/batteryImage"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:visibility="visible"
+        ads:layout_constraintBottom_toBottomOf="@+id/batteryText"
+        ads:layout_constraintRight_toLeftOf="@+id/batteryText"
+        ads:layout_constraintTop_toTopOf="@+id/batteryText" />
+
     <TextView
         android:id="@+id/batteryText"
         android:layout_width="wrap_content"
