@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         width = config.screenWidthDp;
         height = config.screenHeightDp;
         tag = (String)findViewById(R.id.topMostLayout).getTag();
+        System.out.println("Mohseen : tag : " + findViewById(R.id.topMostLayout).getTag());
 
         textClock = (TextClock) findViewById(R.id.textClock);
 
@@ -116,7 +117,6 @@ public class MainActivity extends AppCompatActivity {
                     textViewDate.setTextSize(24);
                 }
             }
-
         }
     }
 

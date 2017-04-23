@@ -5,6 +5,7 @@
     <dimen name="textClockAM_textSize">40sp</dimen>
     <dimen name="textClockDay_textSize">60sp</dimen>
     <dimen name="textClockDate_textSize">28sp</dimen>
+    <dimen name="battery_ImgSize">80dp</dimen>
     <dimen name="batteryText_textSize">40sp</dimen>
     <dimen name="constLayout_Day">372dp</dimen>
 </resources>
