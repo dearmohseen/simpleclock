@@ -1,141 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:ads="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.constraint.ConstraintLayout  xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/black"
-    android:orientation="vertical"
-    tools:context="com.mkhan.myapplication.MainActivity"
-    android:weightSum="1"
     android:id="@+id/topMostLayout"
-    android:tag="land-xlarge"
-    android:baselineAligned="false"
-    android:layout_weight="1">
+    android:tag="xlarge-land"
+    >
 
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_ad_unit_id_1"
-        android:layout_marginRight="8dp"
-        ads:layout_constraintRight_toRightOf="parent"
-        tools:layout_constraintTop_creator="1"
-        android:layout_marginEnd="8dp"
-        ads:layout_constraintTop_toTopOf="parent" />
-
-    <TextClock
-        android:id="@+id/textClock"
-        style="@style/Animation.AppCompat.DropDownUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="153dp"
-        android:fontFamily="serif"
-        android:format12Hour="hh:mm"
-        android:text="@string/date_constant"
-        android:textAlignment="textStart"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/textClock_textSize"
-        android:typeface="normal"
-        ads:layout_constraintBottom_toBottomOf="parent"
-        ads:layout_constraintHorizontal_bias="0.44"
-        ads:layout_constraintLeft_toLeftOf="parent"
-        ads:layout_constraintRight_toRightOf="parent" />
-
-    <TextClock
-        android:id="@+id/textClockSeconds"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="serif"
-        android:format12Hour="ss"
-        android:format24Hour="ss"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/textClockSec_textSize"
-        android:textStyle="normal"
-        ads:layout_constraintLeft_toRightOf="@+id/textClock"
-        ads:layout_constraintTop_toTopOf="@+id/textClock" />
-
-    <TextClock
-        android:id="@+id/textClockAM"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:fontFamily="serif"
-        android:format12Hour="a"
-        android:format24Hour=""
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/textClockAM_textSize"
-        android:textStyle="normal"
-        ads:layout_constraintBottom_toBottomOf="@+id/textClock"
-        ads:layout_constraintLeft_toRightOf="@+id/textClock" />
-
-    <TextView
-        android:id="@+id/textViewDay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="84dp"
-        android:clickable="true"
-        android:fontFamily="serif"
-        android:text="@string/saturday"
-        android:textAlignment="viewStart"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/textClockDay_textSize"
-        ads:layout_constraintLeft_toLeftOf="parent"
-        ads:layout_constraintTop_toTopOf="parent"
-        ads:layout_constraintRight_toLeftOf="@+id/textClock"
-        android:layout_marginRight="8dp"
-        ads:layout_constraintHorizontal_bias="0.685"
-        android:layout_marginBottom="8dp"
-        ads:layout_constraintBottom_toTopOf="@+id/textClock"
-        ads:layout_constraintVertical_bias="0.502" />
-
-    <TextView
-        android:id="@+id/textViewDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:fontFamily="serif"
-        android:text="@string/date_constant"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/textClockDate_textSize"
-        android:typeface="normal"
-        android:layout_marginTop="8dp"
-        ads:layout_constraintTop_toBottomOf="@+id/textViewDay"
-        android:layout_marginLeft="8dp"
-        ads:layout_constraintLeft_toLeftOf="@+id/textViewDay" />
-
-    <ImageView
-        android:id="@+id/batteryImage"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:visibility="visible"
-        ads:layout_constraintBottom_toBottomOf="@+id/batteryText"
-        ads:layout_constraintRight_toLeftOf="@+id/batteryText"
-        ads:layout_constraintTop_toTopOf="@+id/batteryText"
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        layout="@layout/common_layout_land"
         />
-    <TextView
-        android:id="@+id/batteryText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="32dp"
-        android:fontFamily="serif"
-        android:text="Battery : 100 %"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/batteryText_textSize"
-        android:typeface="normal"
-        ads:layout_constraintRight_toRightOf="parent"
-        ads:layout_constraintTop_toTopOf="@+id/textViewDay"
-        android:layout_marginTop="8dp" />
 
 </android.support.constraint.ConstraintLayout>
