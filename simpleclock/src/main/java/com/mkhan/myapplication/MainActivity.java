@@ -12,6 +12,7 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextClock;
 import android.widget.TextView;
@@ -34,17 +35,10 @@ public class MainActivity extends AppCompatActivity {
     private int width , height;
     private String tag;
     IntentFilter batteryFilter;
-    Intent batteryStatus;
+    Intent batteryStatusIntent;
     private TextView  batteryText;
-
-    private BroadcastReceiver mBatInfoReceiver = new BroadcastReceiver(){
-        @Override
-        public void onReceive(Context ctxt, Intent intent) {
-            int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
-            batteryText.setText("Battery : " + String.valueOf(level) + " %");
-        }
-    }; 
-
+    boolean chargingStatus;
+    ImageView batteryImage;
 
 
     @Override
@@ -63,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         textClock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
 
                 /*String size = (String)findViewById(R.id.topMostLayout).getTag();
                 String message = config.screenWidthDp + " : " +config.screenHeightDp + " : " + tag;
@@ -93,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
 
         MobileAds.initialize(getApplicationContext(), getResources().getString(R.string.banner_ad_unit_id_1));
         AdView mAdView1 = (AdView) findViewById(R.id.adView1);
-        //mAdView1.setVisibility(View.INVISIBLE);
+        mAdView1.setVisibility(View.INVISIBLE);
 
         Bundle extras = new Bundle();
         extras.putBoolean("is_designed_for_families", true);
@@ -126,25 +121,69 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openCalendarApp(){
-        //Log.d("Testing",ACCESSIBILITY_SERVICE);
         Toast.makeText(getBaseContext(),"Opening Calendar", Toast.LENGTH_SHORT).show();
         startActivity(ClockUtility.openCalendarApp());
     }
 
     private void initializeBattery(){
         batteryFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
-        batteryStatus = getBaseContext().registerReceiver(this.mBatInfoReceiver, batteryFilter);
-
-        int level = batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
-        /*int scale = batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
-        float batteryPct = level / (float)scale;*/
-
-
+        batteryStatusIntent = getBaseContext().registerReceiver(this.mBatInfoReceiver, batteryFilter);
         batteryText = (TextView) findViewById(R.id.batteryText);
-        batteryText.setText("Battery : " + String.valueOf(level) + " %");
-        //this.registerReceiver(this.mBatInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+
+        batteryImage = (ImageView) findViewById(R.id.batteryImage);
+        batteryImage.setMaxWidth(batteryText.getWidth());
+        batteryImage.setMaxHeight(batteryText.getHeight());
     }
 
+    private BroadcastReceiver mBatInfoReceiver = new BroadcastReceiver(){
+        @Override
+        public void onReceive(Context ctxt, Intent intent) {
+
+            BatteryManager bm = (BatteryManager)getSystemService(BATTERY_SERVICE);
+
+            int  health= intent.getIntExtra(BatteryManager.EXTRA_HEALTH,0);
+
+            int  level= intent.getIntExtra(BatteryManager.EXTRA_LEVEL,0);
+            int  plugged= intent.getIntExtra(BatteryManager.EXTRA_PLUGGED,0);
+            boolean  present= intent.getExtras().getBoolean(BatteryManager.EXTRA_PRESENT);
+            int  scale= intent.getIntExtra(BatteryManager.EXTRA_SCALE,0);
+            int  status= intent.getIntExtra(BatteryManager.EXTRA_STATUS,0);
+            String  technology= intent.getExtras().getString(BatteryManager.EXTRA_TECHNOLOGY);
+            int  temperature= intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE,0);
+            int  voltage= intent.getIntExtra(BatteryManager.EXTRA_VOLTAGE,0);
+            //plugged = 0;
+            level = 100;
+            if(plugged > 0 ){//battery is charging
+                System.out.println("Battery is Charging : "  +  plugged);
+                batteryImage.setImageResource(R.drawable.ic_battery_charging);
+            } else {
+                if(level == 100){
+                    batteryImage.setImageResource(R.drawable.ic_battery_full);
+                } else if(level >= 75 && level < 100){
+                    batteryImage.setImageResource(R.drawable.ic_battery_80);
+                } else if(level >= 45 && level < 80){
+                    batteryImage.setImageResource(R.drawable.ic_battery_60);
+                } else if(level >= 25 && level < 45){
+                    batteryImage.setImageResource(R.drawable.ic_battery_40);
+                } else if(level < 25){
+                    batteryImage.setImageResource(R.drawable.ic_battery_20);
+                }
+            }
+
+            batteryText.setText(level + " %");
+            /*batteryText.setText(
+                    "Health: "+health+"\n"+
+                            "Level: "+level+"\n"+
+                            "Plugged: "+plugged+"\n"+
+                            "Present: "+present+"\n"+
+                            "Scale: "+scale+"\n"+
+                            "Status: "+status+"\n"+
+                            "Technology: "+technology+"\n"+
+                            "Temperature: "+temperature+"\n"+
+                            "Voltage: "+voltage+"\n");*/
+            //batteryText.setTextSize(18);
+        }
+    };
 
 }
 
