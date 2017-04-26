@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/black"
+    android:background="@android:color/holo_red_dark"
     android:orientation="vertical"
     tools:context="com.mkhan.myapplication.MainActivity"
     android:weightSum="1"
@@ -101,10 +101,10 @@
         android:layout_marginTop="0dp"
         ads:layout_constraintBottom_toBottomOf="parent"
         ads:layout_constraintTop_toBottomOf="@+id/textClockAM"
-        ads:layout_constraintVertical_bias="0.241"
-        android:layout_marginLeft="0dp"
-        ads:layout_constraintLeft_toLeftOf="@+id/constraintLayout"
-        android:id="@+id/constraintLayout2">
+        ads:layout_constraintVertical_bias="0.222"
+        android:id="@+id/constraintLayout2"
+        android:layout_marginLeft="8dp"
+        ads:layout_constraintLeft_toLeftOf="parent">
 
         <TextView
             android:id="@+id/textViewDay"
@@ -168,6 +168,23 @@
         android:textSize="@dimen/batteryText_textSize"
         android:typeface="normal"
         ads:layout_constraintBottom_toBottomOf="parent"
+        ads:layout_constraintRight_toRightOf="parent" />
+
+    <Button
+        android:id="@+id/btnStopWatch"
+        style="@android:style/Widget.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="21dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="8dp"
+        android:fontFamily="serif"
+        android:text="Stopwatch"
+        android:textAlignment="textStart"
+        android:textSize="14sp"
+        ads:layout_constraintBottom_toTopOf="@+id/batteryText"
+        ads:layout_constraintHorizontal_bias="0.111"
+        ads:layout_constraintLeft_toLeftOf="@+id/batteryImage"
         ads:layout_constraintRight_toRightOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

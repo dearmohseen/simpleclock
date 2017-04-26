@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -39,7 +40,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView  batteryText;
     boolean chargingStatus;
     ImageView batteryImage;
-
+    Button btnStopWatch;
+    Intent stopClockIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         width = config.screenWidthDp;
         height = config.screenHeightDp;
         tag = (String)findViewById(R.id.topMostLayout).getTag();
-        System.out.println("Mohseen : tag : " + findViewById(R.id.topMostLayout).getTag());
+//        System.out.println("Mohseen : tag : " + findViewById(R.id.topMostLayout).getTag());
 
         textClock = (TextClock) findViewById(R.id.textClock);
 
@@ -58,15 +60,11 @@ public class MainActivity extends AppCompatActivity {
         textClock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 /*String size = (String)findViewById(R.id.topMostLayout).getTag();
                 String message = config.screenWidthDp + " : " +config.screenHeightDp + " : " + tag;
                 Toast toast = Toast.makeText(getBaseContext(),message, Toast.LENGTH_SHORT);
                 toast.show();*/
 
-                //setTextSizes();
-             //   System.out.println("Mohseen On Click : Size " + config.screenWidthDp + " : " +config.screenHeightDp + " : " + tag);
                 openCalendarApp();
             }
         });
@@ -91,9 +89,6 @@ public class MainActivity extends AppCompatActivity {
         AdView mAdView1 = (AdView) findViewById(R.id.adView1);
         mAdView1.setVisibility(View.INVISIBLE);
 
-        Bundle extras = new Bundle();
-        extras.putBoolean("is_designed_for_families", true);
-
         AdRequest adRequest = new AdRequest.Builder().build();
         adRequest.isTestDevice(this);
         mAdView1.loadAd(adRequest);
@@ -101,6 +96,17 @@ public class MainActivity extends AppCompatActivity {
         setTextSizes();
 
         initializeBattery();
+
+        stopClockIntent = new Intent(getApplicationContext(), StopClockActivity.class);
+
+        btnStopWatch = (Button) findViewById(R.id.btnStopWatch);
+        btnStopWatch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(stopClockIntent);
+            }
+        });
     }
 
     public void setTextSizes(){
@@ -139,49 +145,29 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context ctxt, Intent intent) {
 
-            BatteryManager bm = (BatteryManager)getSystemService(BATTERY_SERVICE);
-
-            int  health= intent.getIntExtra(BatteryManager.EXTRA_HEALTH,0);
-
             int  level= intent.getIntExtra(BatteryManager.EXTRA_LEVEL,0);
             int  plugged= intent.getIntExtra(BatteryManager.EXTRA_PLUGGED,0);
-            boolean  present= intent.getExtras().getBoolean(BatteryManager.EXTRA_PRESENT);
-            int  scale= intent.getIntExtra(BatteryManager.EXTRA_SCALE,0);
-            int  status= intent.getIntExtra(BatteryManager.EXTRA_STATUS,0);
-            String  technology= intent.getExtras().getString(BatteryManager.EXTRA_TECHNOLOGY);
-            int  temperature= intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE,0);
-            int  voltage= intent.getIntExtra(BatteryManager.EXTRA_VOLTAGE,0);
             //plugged = 0;
-            level = 100;
+            //level = 100;
             if(plugged > 0 ){//battery is charging
                 System.out.println("Battery is Charging : "  +  plugged);
                 batteryImage.setImageResource(R.drawable.ic_battery_charging);
             } else {
-                if(level == 100){
+                if(level > 90 ){
                     batteryImage.setImageResource(R.drawable.ic_battery_full);
-                } else if(level >= 75 && level < 100){
+                } else if(level >= 70 && level <= 90){
                     batteryImage.setImageResource(R.drawable.ic_battery_80);
-                } else if(level >= 45 && level < 80){
+                } else if(level >= 50 && level < 70){
                     batteryImage.setImageResource(R.drawable.ic_battery_60);
-                } else if(level >= 25 && level < 45){
+                } else if(level >= 30 && level < 50){
                     batteryImage.setImageResource(R.drawable.ic_battery_40);
-                } else if(level < 25){
+                } else if(level < 30){
                     batteryImage.setImageResource(R.drawable.ic_battery_20);
                 }
             }
 
             batteryText.setText(level + " %");
-            /*batteryText.setText(
-                    "Health: "+health+"\n"+
-                            "Level: "+level+"\n"+
-                            "Plugged: "+plugged+"\n"+
-                            "Present: "+present+"\n"+
-                            "Scale: "+scale+"\n"+
-                            "Status: "+status+"\n"+
-                            "Technology: "+technology+"\n"+
-                            "Temperature: "+temperature+"\n"+
-                            "Voltage: "+voltage+"\n");*/
-            //batteryText.setTextSize(18);
+
         }
     };
 
