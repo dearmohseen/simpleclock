@@ -56,15 +56,9 @@ public class MainActivity extends AppCompatActivity {
 
         textClock = (TextClock) findViewById(R.id.textClock);
 
-        //textClock.setTextSize();
         textClock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*String size = (String)findViewById(R.id.topMostLayout).getTag();
-                String message = config.screenWidthDp + " : " +config.screenHeightDp + " : " + tag;
-                Toast toast = Toast.makeText(getBaseContext(),message, Toast.LENGTH_SHORT);
-                toast.show();*/
-
                 openCalendarApp();
             }
         });

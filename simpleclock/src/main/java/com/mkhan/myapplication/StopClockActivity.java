@@ -9,6 +9,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -71,7 +72,6 @@ public class StopClockActivity extends AppCompatActivity {
         btnStopWatchClock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //System.out.println("Mohseen closing activity : ");
                 finish();
             }
         });
@@ -128,6 +128,7 @@ public class StopClockActivity extends AppCompatActivity {
                 TextView textView=(TextView) view.findViewById(android.R.id.text1);
                 textView.setTextColor(Color.WHITE);
                 textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,25);
+                textView.setGravity(Gravity.CENTER);
                 return view;
             }
         };
