@@ -44,33 +44,6 @@
         android:layout_above="@+id/btnStopWatchPlay" />
 
     <Button
-        android:id="@+id/btnStopWatchClock"
-        style="@android:style/Widget.Button.Inset"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@android:color/holo_green_light"
-        android:fontFamily="serif"
-        android:text="Back"
-        android:textSize="24sp"
-        ads:layout_constraintStart_toStartOf="parent"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/txtStopWatch" />
-
-    <Button
-        android:id="@+id/btnStopWatchReset"
-        style="@android:style/Widget.Button.Inset"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:backgroundTint="@android:color/holo_red_dark"
-        android:fontFamily="serif"
-        android:text="Reset"
-        android:textColor="@android:color/background_light"
-        android:textSize="24sp"
-        ads:layout_constraintLeft_toRightOf="@+id/btnStopWatchClock" />
-
-    <Button
         android:id="@+id/btnStopWatchPlay"
         style="@android:style/Widget.Button.Inset"
         android:layout_width="wrap_content"
@@ -87,6 +60,35 @@
         android:typeface="serif" />
 
     <Button
+        android:id="@+id/btnStopWatchClock"
+        style="@android:style/Widget.Button.Inset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/holo_green_light"
+        android:fontFamily="serif"
+        android:text="Back"
+        android:textSize="24sp"
+        android:layout_marginBottom="5dp"
+        ads:layout_constraintStart_toStartOf="parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/txtStopWatch" />
+
+    <Button
+        android:id="@+id/btnStopWatchReset"
+        style="@android:style/Widget.Button.Inset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/holo_red_dark"
+        android:fontFamily="serif"
+        android:text="Reset"
+        android:layout_marginBottom="5dp"
+        android:textColor="@android:color/background_light"
+        android:textSize="24sp"
+        ads:layout_constraintLeft_toRightOf="@+id/btnStopWatchClock"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
         android:id="@+id/btnLap"
         style="@android:style/Widget.Button.Inset"
         android:layout_width="wrap_content"
@@ -95,6 +97,7 @@
         android:fontFamily="serif"
         android:text="Lap"
         android:textSize="24sp"
+        android:layout_marginBottom="5dp"
         ads:layout_constraintBottom_toBottomOf="parent"
         ads:layout_constraintRight_toRightOf="@id/btnStopWatchPlay"
         android:layout_alignParentBottom="true"

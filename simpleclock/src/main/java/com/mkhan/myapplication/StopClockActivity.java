@@ -32,6 +32,7 @@ public class StopClockActivity extends AppCompatActivity {
     Button btnStopWatchReset;
 
     long MillisecondTime, StartTime, TimeBuff, UpdateTime = 0L ;
+    String milliSecond;
 
     Handler handler;
 
@@ -170,10 +171,27 @@ public class StopClockActivity extends AppCompatActivity {
             Minutes = Seconds / 60;
             Seconds = Seconds % 60;
             MilliSeconds = (int) (UpdateTime % 1000);
+            milliSecond = String.valueOf(MilliSeconds);
 
-            txtStopWatch.setText("" + Minutes + ":"
-                    + String.format("%02d", Seconds) + ":"
-                    + String.format("%03d", MilliSeconds));
+            if(milliSecond.length()>2){
+                txtStopWatch.setText(String.format("%02d", Minutes)  + ":"
+                        + String.format("%02d", Seconds) + ":"
+                        + milliSecond.substring(0,2) );
+            }
+            else if(milliSecond.length()==1){
+               // System.out.println("Mohseen : Milliseconds " + milliSecond);
+                txtStopWatch.setText(String.format("%02d", Minutes)  + ":"
+                        + String.format("%02d", Seconds) + ":0"
+                        + milliSecond);
+            } else {
+                txtStopWatch.setText(String.format("%02d", Minutes)  + ":"
+                        + String.format("%02d", Seconds) + ":"
+                        + milliSecond);
+            }
+
+
+
+                   // + String.format("%01d", milliSecond));
 
             handler.postDelayed(this, 0);
         }
