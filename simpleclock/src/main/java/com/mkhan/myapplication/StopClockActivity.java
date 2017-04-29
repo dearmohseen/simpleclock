@@ -92,6 +92,7 @@ public class StopClockActivity extends AppCompatActivity {
                 MilliSeconds = 0 ;
 
                 listElementsArrayList.clear();
+                adapter.notifyDataSetChanged();
                 handler.removeCallbacks(runnable);
                 txtStopWatch.setText("00:00:00");
                 btnStopWatchPlay.setText("Start");
