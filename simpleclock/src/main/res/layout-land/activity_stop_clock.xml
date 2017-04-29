@@ -24,9 +24,9 @@
         ads:layout_constraintLeft_toLeftOf="parent"
         ads:layout_constraintRight_toRightOf="parent"
         tools:layout_editor_absoluteY="0dp"
-        android:layout_alignTop="@+id/listStopwatch"
-        android:layout_alignEnd="@+id/btnLap"
-        android:layout_marginTop="24dp" />
+        android:layout_marginTop="26dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/btnStopWatchClock" />
 
     <ListView
         android:id="@+id/listStopwatch"
@@ -46,63 +46,64 @@
 
     <Button
         android:id="@+id/btnStopWatchPlay"
-        style="@android:style/Widget.Button.Inset"
+        style="@style/MyButtonStyleGreen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:minWidth="200dp"
-        android:backgroundTint="@android:color/holo_green_light"
+        android:layout_above="@+id/btnStopWatchReset"
+        android:layout_alignEnd="@+id/txtStopWatch"
+        android:layout_alignStart="@+id/txtStopWatch"
+        android:layout_marginBottom="19dp"
         android:fontFamily="serif"
+        android:minWidth="200dp"
         android:text="Start"
         android:textSize="32sp"
         android:textStyle="bold"
-        android:typeface="serif"
-        android:layout_marginStart="22dp"
-        android:layout_alignStart="@+id/txtStopWatch"
-        android:layout_above="@+id/btnStopWatchClock" />
+        android:typeface="serif" />
 
     <Button
         android:id="@+id/btnStopWatchClock"
-        style="@android:style/Widget.Button.Inset"
+        style="@style/MyButtonStyleGreen"
         android:layout_width="wrap_content"
+
         android:layout_height="wrap_content"
-        android:backgroundTint="@android:color/holo_green_light"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
         android:fontFamily="serif"
         android:text="Back"
         android:textSize="24sp"
-        ads:layout_constraintStart_toStartOf="parent"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp" />
+        ads:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnStopWatchReset"
         style="@android:style/Widget.Button.Inset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@android:color/holo_red_dark"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/holo_red_dark"
         android:fontFamily="serif"
+        android:layout_marginLeft="10dp"
         android:text="Reset"
         android:textColor="@android:color/background_light"
         android:textSize="24sp"
         ads:layout_constraintLeft_toRightOf="@+id/btnStopWatchClock"
-        android:layout_marginStart="21dp"
         android:layout_alignBaseline="@+id/btnStopWatchClock"
         android:layout_alignBottom="@+id/btnStopWatchClock"
         android:layout_toEndOf="@+id/btnStopWatchClock" />
 
     <Button
         android:id="@+id/btnLap"
-        style="@android:style/Widget.Button.Inset"
+        style="@style/MyButtonStyleGreen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@android:color/holo_green_light"
+
+        android:layout_alignBaseline="@+id/btnStopWatchReset"
+        android:layout_alignBottom="@+id/btnStopWatchReset"
+        android:layout_alignEnd="@+id/btnStopWatchPlay"
         android:fontFamily="serif"
         android:text="Lap"
         android:textSize="24sp"
         ads:layout_constraintBottom_toBottomOf="parent"
-        ads:layout_constraintRight_toRightOf="@id/btnStopWatchPlay"
-        android:layout_alignBaseline="@+id/btnStopWatchReset"
-        android:layout_alignBottom="@+id/btnStopWatchReset"
-        android:layout_alignParentEnd="true" />
+        ads:layout_constraintRight_toRightOf="@id/btnStopWatchPlay" />
 
 </RelativeLayout>

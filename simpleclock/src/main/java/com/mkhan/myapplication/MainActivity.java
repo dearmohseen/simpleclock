@@ -8,13 +8,9 @@ import android.content.res.Configuration;
 import android.os.BatteryManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,13 +31,13 @@ public class MainActivity extends AppCompatActivity {
     private Configuration config;
     private int width , height;
     private String tag;
-    IntentFilter batteryFilter;
-    Intent batteryStatusIntent;
+    private IntentFilter batteryFilter;
+    private Intent batteryStatusIntent;
     private TextView  batteryText;
     boolean chargingStatus;
-    ImageView batteryImage;
-    Button btnStopWatch;
-    Intent stopClockIntent;
+    private ImageView batteryImage;
+    private Button btnStopWatch;
+    private Intent stopClockIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void setTextSizes(){
+    private void setTextSizes(){
         //System.out.println("Mohseen : setTextSizes " + width + " : " +height);
 
         if(config.orientation == 1) {

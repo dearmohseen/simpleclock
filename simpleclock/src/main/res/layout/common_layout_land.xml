@@ -47,21 +47,20 @@
 
     <Button
         android:id="@+id/btnStopWatch"
-        style="@android:style/Widget.Button.Small"
+        style="@style/MyButtonStyleGreen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
-        android:backgroundTint="@android:color/holo_green_light"
-        android:fontFamily="serif"
+
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:text="Stopwatch"
         android:textAlignment="textStart"
         android:textSize="24sp"
         android:textStyle="bold"
         ads:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginLeft="8dp"
         ads:layout_constraintLeft_toLeftOf="parent"
-        ads:layout_constraintRight_toLeftOf="@+id/textClock"
-        android:layout_marginRight="8dp" />
+        ads:layout_constraintRight_toLeftOf="@+id/textClock" />
 
     <TextClock
         android:id="@+id/textClockSeconds"
