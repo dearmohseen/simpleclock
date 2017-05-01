@@ -34,6 +34,7 @@
         android:background="@drawable/border_resource"
         android:divider="#FF0000"
         android:dividerHeight="1dp"
+        android:padding="0dp"
         android:footerDividersEnabled="false"
         android:headerDividersEnabled="false"
         android:scrollbars="vertical"
@@ -53,6 +54,7 @@
         android:layout_alignStart="@+id/listStopwatch"
         android:fontFamily="serif"
         android:text="Start"
+        android:padding="8dp"
         android:layout_marginBottom="8dp"
         android:textSize="32sp"
         />

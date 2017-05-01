@@ -152,40 +152,47 @@
         android:layout_width="@dimen/battery_ImgSize"
         android:layout_height="@dimen/battery_ImgSize"
         android:visibility="visible"
-        ads:layout_constraintBottom_toBottomOf="@+id/batteryText"
+        ads:layout_constraintTop_toTopOf="@+id/batteryText"
         ads:layout_constraintRight_toLeftOf="@+id/batteryText"
-        ads:layout_constraintTop_toTopOf="@+id/batteryText" />
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="0dp"
+        ads:layout_constraintBottom_toBottomOf="@+id/batteryText"
+        android:layout_marginBottom="0dp" />
 
     <TextView
         android:id="@+id/batteryText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginRight="16dp"
         android:fontFamily="serif"
         android:text="100 %"
         android:textColor="@android:color/white"
         android:textSize="@dimen/batteryText_textSize"
         android:typeface="normal"
+        android:layout_marginRight="16dp"
         ads:layout_constraintRight_toRightOf="parent"
-        ads:layout_constraintBottom_toTopOf="@+id/btnStopWatch" />
+        ads:layout_constraintTop_toTopOf="@+id/btnStopWatch"
+        android:layout_marginTop="0dp" />
 
     <Button
         android:id="@+id/btnStopWatch"
         style="@style/MyButtonStyleGreen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp"
-
+        android:layout_marginBottom="8dp"
         android:fontFamily="serif"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp"
         android:text="Stopwatch"
-        android:textAlignment="textStart"
+        android:textAlignment="center"
         android:textSize="24sp"
-        android:textStyle="bold"
+        android:textStyle="normal"
         ads:layout_constraintBottom_toBottomOf="parent"
-        ads:layout_constraintLeft_toLeftOf="@+id/batteryImage"
-        ads:layout_constraintRight_toRightOf="@+id/batteryText" />
+        android:layout_marginLeft="8dp"
+        ads:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="8dp"
+        ads:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
+        ads:layout_constraintVertical_bias="0.68" />
 
 </android.support.constraint.ConstraintLayout>

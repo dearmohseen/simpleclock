@@ -10,6 +10,7 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -23,7 +24,6 @@ public class StopClockActivity extends AppCompatActivity {
 
     TextView txtStopWatch ;
     Button btnStopWatchPlay;
-    //Button btnStopWatchPause;
     Button btnLap;
     Button btnStopWatchClock;
     Button btnStopWatchReset;
@@ -49,6 +49,7 @@ public class StopClockActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stop_clock);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         config = getResources().getConfiguration();
         width = config.screenWidthDp;
@@ -93,6 +94,7 @@ public class StopClockActivity extends AppCompatActivity {
                 handler.removeCallbacks(runnable);
                 txtStopWatch.setText("00:00:00");
                 btnStopWatchPlay.setText("Start");
+                btnLap.setEnabled(false);
 
             }
         });
@@ -104,13 +106,14 @@ public class StopClockActivity extends AppCompatActivity {
         btnLap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("Mohseen Lap : " + txtStopWatch.getText().toString()
-                        + " List Size : " + listElementsArrayList.size());
+                /*System.out.println("Mohseen Lap : " + txtStopWatch.getText().toString()
+                        + " List Size : " + listElementsArrayList.size());*/
                 listElementsArrayList.add(listElementsArrayList.size()+1 + ".  " +txtStopWatch.getText().toString());
                 adapter.notifyDataSetChanged();
                 listView.smoothScrollToPosition(adapter.getCount());
             }
         });
+        btnLap.setEnabled(false);
     }
 
     public void createLapList(){
@@ -144,6 +147,7 @@ public class StopClockActivity extends AppCompatActivity {
                 StartTime = SystemClock.uptimeMillis();
                 handler.postDelayed(runnable, 0);
                 toggleStartPauseText();
+                btnLap.setEnabled(true);
             }
         });
     }
@@ -186,10 +190,6 @@ public class StopClockActivity extends AppCompatActivity {
                         + String.format("%02d", Seconds) + ":"
                         + milliSecond);
             }
-
-
-
-                   // + String.format("%01d", milliSecond));
 
             handler.postDelayed(this, 0);
         }
