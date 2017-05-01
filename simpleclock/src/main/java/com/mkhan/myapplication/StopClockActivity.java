@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Handler;
-import android.os.Parcelable;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,8 +18,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class StopClockActivity extends AppCompatActivity {
 
@@ -37,8 +34,6 @@ public class StopClockActivity extends AppCompatActivity {
 
     int Seconds, Minutes, MilliSeconds ;
     ListView listView ;
-
-    /*String[] ListElements = new String[] {  };*/
 
     ArrayList<String> listElementsArrayList ;
 
