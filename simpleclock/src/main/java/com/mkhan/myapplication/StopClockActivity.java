@@ -67,9 +67,13 @@ public class StopClockActivity extends AppCompatActivity {
         createMainClockButon();
         createReset();
 
-        if(savedInstanceState != null){
-            if(btnStopWatchPlay != null )btnStopWatchPlay.performClick();
-            adapter.notifyDataSetChanged();
+        if(savedInstanceState != null) {
+            //System.out.println("Mohseen : AA - btnStopWatchPlay.getText() : " + btnStopWatchPlay.getText() );
+            /*if(btnStopWatchPlay != null && btnStopWatchPlay.getText().equals("Pause")){
+                btnStopWatchPlay.performClick();
+                adapter.notifyDataSetChanged();
+            }*/
+
         }
         //setTextSizes();
     }
@@ -81,6 +85,7 @@ public class StopClockActivity extends AppCompatActivity {
         outState.putString("clockValue",txtStopWatch.getText().toString());
         outState.putLong("StartTime",StartTime);
         outState.putStringArrayList("listElementsArrayList", listElementsArrayList);
+        outState.putString("btnStopWatchPlay.text",btnStopWatchPlay.getText().toString());
 
     }
 
@@ -91,8 +96,15 @@ public class StopClockActivity extends AppCompatActivity {
         txtStopWatch.setText(savedInstanceState.getString("clockValue"));
         StartTime = savedInstanceState.getLong("StartTime");
         setupList(savedInstanceState.getStringArrayList("listElementsArrayList"));
-        /*System.out.println("Mohseen : onRestoreInstanceState adapter - " + adapter.getCount() + " listElementsArrayList " + listElementsArrayList.size() +
-        " listiew " + listView.getAdapter());*/
+        //System.out.println("Mohseen : onRestoreInstanceState btnStopWatchPlay - " + btnStopWatchPlay.getText() );
+
+        if("pause".equalsIgnoreCase(savedInstanceState.getString("btnStopWatchPlay.text"))){
+            /*btnStopWatchPlay.performClick();
+            adapter.notifyDataSetChanged();*/
+            playBtnClick();
+        } else if ("start".equalsIgnoreCase(savedInstanceState.getString("btnStopWatchPlay.text"))){
+            btnLap.setEnabled(false);
+        }
 
     }
 
@@ -180,11 +192,15 @@ public class StopClockActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 StartTime = SystemClock.uptimeMillis();
-                handler.postDelayed(runnable, 0);
-                toggleStartPauseText();
-                btnLap.setEnabled(true);
+                playBtnClick();
             }
         });
+    }
+
+    private void playBtnClick(){
+        handler.postDelayed(runnable, 0);
+        toggleStartPauseText();
+        btnLap.setEnabled(true);
     }
 
     public void toggleStartPauseText(){
