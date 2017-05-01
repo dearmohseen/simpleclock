@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Digital Clock</string>
+    <string name="app_name">Simple Digital Clock with Stopwatch</string>
     <string name="banner_ad_unit_id_1">ca-app-pub-1322448895447717/9531904783</string>
     <string name="date_constant">Date</string>
     <string name="saturday">Saturday</string>

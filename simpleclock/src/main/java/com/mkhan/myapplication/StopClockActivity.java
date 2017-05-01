@@ -1,8 +1,10 @@
 package com.mkhan.myapplication;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Handler;
+import android.os.Parcelable;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -36,9 +38,9 @@ public class StopClockActivity extends AppCompatActivity {
     int Seconds, Minutes, MilliSeconds ;
     ListView listView ;
 
-    String[] ListElements = new String[] {  };
+    /*String[] ListElements = new String[] {  };*/
 
-    List<String> listElementsArrayList ;
+    ArrayList<String> listElementsArrayList ;
 
     ArrayAdapter<String> adapter ;
 
@@ -51,19 +53,76 @@ public class StopClockActivity extends AppCompatActivity {
         setContentView(R.layout.activity_stop_clock);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
+//        System.out.println("Mohseen : stopwatch " + savedInstanceState);
+
+        int display_mode = getResources().getConfiguration().orientation;
+
+
+        //if(savedInstanceState == null){
         config = getResources().getConfiguration();
         width = config.screenWidthDp;
         height = config.screenHeightDp;
 
         txtStopWatch = (TextView) findViewById(R.id.txtStopWatch);
-        handler = new Handler() ;
+        handler = new Handler();
 
         createPlay();
         createLapList();
         createLapButton();
         createMainClockButon();
         createReset();
+
+        if(savedInstanceState != null){
+            if(btnStopWatchPlay != null )btnStopWatchPlay.performClick();
+            adapter.notifyDataSetChanged();
+        }
         //setTextSizes();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        //System.out.println("Mohseen : onSaveInstanceState - StartTime : " + StartTime );
+        outState.putString("clockValue",txtStopWatch.getText().toString());
+        outState.putLong("StartTime",StartTime);
+        outState.putStringArrayList("listElementsArrayList", listElementsArrayList);
+
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        txtStopWatch.setText(savedInstanceState.getString("clockValue"));
+        StartTime = savedInstanceState.getLong("StartTime");
+        setupList(savedInstanceState.getStringArrayList("listElementsArrayList"));
+        /*System.out.println("Mohseen : onRestoreInstanceState adapter - " + adapter.getCount() + " listElementsArrayList " + listElementsArrayList.size() +
+        " listiew " + listView.getAdapter());*/
+
+    }
+
+    private void setupList(ArrayList<String> list){
+        listElementsArrayList = list;
+        adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1,
+                listElementsArrayList
+        ){
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View view =super.getView(position, convertView, parent);
+                TextView textView=(TextView) view.findViewById(android.R.id.text1);
+                textView.setTextColor(Color.WHITE);
+                textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,25);
+                textView.setGravity(Gravity.CENTER);
+                return view;
+            }
+        };
+        listView.setAdapter(adapter);
+    }
+
+    public void createLapList(){
+        listView = (ListView)findViewById(R.id.listStopwatch);
+        setupList(new ArrayList<String>());
     }
 
     public void createMainClockButon(){
@@ -71,7 +130,8 @@ public class StopClockActivity extends AppCompatActivity {
         btnStopWatchClock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                //finish();
             }
         });
     }
@@ -90,6 +150,7 @@ public class StopClockActivity extends AppCompatActivity {
                 MilliSeconds = 0 ;
 
                 listElementsArrayList.clear();
+                adapter.clear();
                 adapter.notifyDataSetChanged();
                 handler.removeCallbacks(runnable);
                 txtStopWatch.setText("00:00:00");
@@ -108,7 +169,8 @@ public class StopClockActivity extends AppCompatActivity {
             public void onClick(View view) {
                 /*System.out.println("Mohseen Lap : " + txtStopWatch.getText().toString()
                         + " List Size : " + listElementsArrayList.size());*/
-                listElementsArrayList.add(listElementsArrayList.size()+1 + ".  " +txtStopWatch.getText().toString());
+                //listElementsArrayList.add(listElementsArrayList.size()+1 + ".  " +txtStopWatch.getText().toString());
+                adapter.add(adapter.getCount()+1 + ".  " +txtStopWatch.getText().toString());
                 adapter.notifyDataSetChanged();
                 listView.smoothScrollToPosition(adapter.getCount());
             }
@@ -116,28 +178,6 @@ public class StopClockActivity extends AppCompatActivity {
         btnLap.setEnabled(false);
     }
 
-    public void createLapList(){
-        listView = (ListView)findViewById(R.id.listStopwatch);
-        listElementsArrayList = new ArrayList<String>(Arrays.asList(ListElements));
-
-        adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1,
-                listElementsArrayList
-        ){
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                View view =super.getView(position, convertView, parent);
-                TextView textView=(TextView) view.findViewById(android.R.id.text1);
-                textView.setTextColor(Color.WHITE);
-                textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,25);
-                textView.setGravity(Gravity.CENTER);
-                return view;
-            }
-        };
-
-        listView.setAdapter(adapter);
-
-    }
     public void createPlay(){
 
         btnStopWatchPlay = (Button) findViewById(R.id.btnStopWatchPlay);
