@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/black"
+    android:background="@drawable/border_resource"
     android:orientation="vertical"
     tools:context="com.mkhan.myapplication.MainActivity"
     android:weightSum="1"
@@ -51,13 +51,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
-
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:text="Stopwatch"
         android:textAlignment="textStart"
         android:textSize="24sp"
-        android:textStyle="bold"
         ads:layout_constraintBottom_toBottomOf="parent"
         ads:layout_constraintLeft_toLeftOf="parent"
         ads:layout_constraintRight_toLeftOf="@+id/textClock" />
@@ -100,7 +98,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:clickable="true"
         android:fontFamily="serif"
         android:text="@string/saturday"
@@ -108,13 +106,13 @@
         android:textColor="@android:color/white"
         android:textSize="@dimen/textClockDay_textSize"
         ads:layout_constraintLeft_toLeftOf="parent"
-        ads:layout_constraintTop_toTopOf="parent"
         ads:layout_constraintRight_toLeftOf="@+id/textClock"
         android:layout_marginRight="8dp"
-        ads:layout_constraintHorizontal_bias="0.277"
+        ads:layout_constraintHorizontal_bias="0.456"
         android:layout_marginBottom="8dp"
         ads:layout_constraintBottom_toTopOf="@+id/textClock"
-        ads:layout_constraintVertical_bias="1.0" />
+        ads:layout_constraintVertical_bias="1.0"
+        ads:layout_constraintTop_toBottomOf="@+id/adView1" />
 
     <TextView
         android:id="@+id/textViewDate"
@@ -149,9 +147,11 @@
         android:textColor="@android:color/white"
         android:textSize="@dimen/batteryText_textSize"
         android:typeface="normal"
-        ads:layout_constraintTop_toTopOf="@+id/textViewDay"
-        android:layout_marginTop="8dp"
         android:layout_marginRight="16dp"
-        ads:layout_constraintRight_toRightOf="@+id/textClock" />
+        ads:layout_constraintRight_toRightOf="@+id/textClock"
+        android:layout_marginTop="24dp"
+        ads:layout_constraintTop_toBottomOf="@+id/adView1"
+        android:layout_marginBottom="8dp"
+        ads:layout_constraintBottom_toTopOf="@+id/textClock" />
 
 </android.support.constraint.ConstraintLayout>
