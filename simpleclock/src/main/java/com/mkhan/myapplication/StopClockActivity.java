@@ -38,9 +38,11 @@ public class StopClockActivity extends AppCompatActivity {
     ArrayList<String> listElementsArrayList ;
 
     ArrayAdapter<String> adapter ;
-
     private Configuration config;
     private int width , height;
+    private final String START = "Start";
+    private final String PAUSE = "Pause";
+    private final String RESUME = "Resume";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,14 +69,6 @@ public class StopClockActivity extends AppCompatActivity {
         createMainClockButon();
         createReset();
 
-        if(savedInstanceState != null) {
-            //System.out.println("Mohseen : AA - btnStopWatchPlay.getText() : " + btnStopWatchPlay.getText() );
-            /*if(btnStopWatchPlay != null && btnStopWatchPlay.getText().equals("Pause")){
-                btnStopWatchPlay.performClick();
-                adapter.notifyDataSetChanged();
-            }*/
-
-        }
         //setTextSizes();
     }
 
@@ -84,9 +78,10 @@ public class StopClockActivity extends AppCompatActivity {
         //System.out.println("Mohseen : onSaveInstanceState - StartTime : " + StartTime );
         outState.putString("clockValue",txtStopWatch.getText().toString());
         outState.putLong("StartTime",StartTime);
+        outState.putLong("TimeBuff",TimeBuff);
         outState.putStringArrayList("listElementsArrayList", listElementsArrayList);
         outState.putString("btnStopWatchPlay.text",btnStopWatchPlay.getText().toString());
-
+        outState.putBoolean("btnLap.enable",btnLap.isEnabled());
     }
 
     @Override
@@ -95,17 +90,17 @@ public class StopClockActivity extends AppCompatActivity {
 
         txtStopWatch.setText(savedInstanceState.getString("clockValue"));
         StartTime = savedInstanceState.getLong("StartTime");
+        TimeBuff = savedInstanceState.getLong("TimeBuff");
         setupList(savedInstanceState.getStringArrayList("listElementsArrayList"));
-        //System.out.println("Mohseen : onRestoreInstanceState btnStopWatchPlay - " + btnStopWatchPlay.getText() );
+       String btnPlayText = savedInstanceState.getString("btnStopWatchPlay.text");
+        btnStopWatchPlay.setText(btnPlayText);
+        btnLap.setEnabled(savedInstanceState.getBoolean("btnLap.enable"));
 
-        if("pause".equalsIgnoreCase(savedInstanceState.getString("btnStopWatchPlay.text"))){
-            /*btnStopWatchPlay.performClick();
-            adapter.notifyDataSetChanged();*/
-            playBtnClick();
-        } else if ("start".equalsIgnoreCase(savedInstanceState.getString("btnStopWatchPlay.text"))){
-            btnLap.setEnabled(false);
+       //System.out.println("Mohseen : onRestoreInstanceState btnStopWatchPlay - " +  btnPlayText);
+
+        if(PAUSE.equalsIgnoreCase(btnPlayText)){
+            handler.postDelayed(runnable, 0);
         }
-
     }
 
     private void setupList(ArrayList<String> list){
@@ -161,7 +156,7 @@ public class StopClockActivity extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
                 handler.removeCallbacks(runnable);
                 txtStopWatch.setText("00:00:00");
-                btnStopWatchPlay.setText("Start");
+                btnStopWatchPlay.setText(START);
                 btnLap.setEnabled(false);
 
             }
@@ -191,25 +186,38 @@ public class StopClockActivity extends AppCompatActivity {
         btnStopWatchPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                StartTime = SystemClock.uptimeMillis();
-                playBtnClick();
+                playBtnClick(btnStopWatchPlay.getText().toString());
             }
         });
     }
 
-    private void playBtnClick(){
+    private void playBtnClick(String btnPlayText){
+        //System.out.println("Mohseen Play Click : " + btnPlayText + " - StartTime - " + StartTime + " TimeBuff - " + TimeBuff);
+
+        if(!"pause".equalsIgnoreCase(btnPlayText)){
+            StartTime = SystemClock.uptimeMillis();
+        }
+        //System.out.println("Mohseen : StartTime - " + StartTime + " TimeBuff - " + TimeBuff);
+
         handler.postDelayed(runnable, 0);
-        toggleStartPauseText();
-        btnLap.setEnabled(true);
+        toggleStartPauseText(btnPlayText);
+
     }
 
-    public void toggleStartPauseText(){
-        if(btnStopWatchPlay.getText().equals("Start")){
-            btnStopWatchPlay.setText("Pause");
-        }else{
-            btnStopWatchPlay.setText("Start");
+    public void toggleStartPauseText(String btnPlayText){
+       // System.out.println("Mohseen : toggleStartPauseText - " + btnPlayText);
+
+        if(btnPlayText.equals(START)){
+            btnStopWatchPlay.setText(PAUSE);
+            btnLap.setEnabled(true);
+        } else if(btnPlayText.equals(PAUSE)){
+            btnStopWatchPlay.setText(RESUME);
             TimeBuff += MillisecondTime;
+            btnLap.setEnabled(false);
             handler.removeCallbacks(runnable);
+        }  else{
+            btnLap.setEnabled(true);
+            btnStopWatchPlay.setText(PAUSE);
         }
 
     }
@@ -226,13 +234,14 @@ public class StopClockActivity extends AppCompatActivity {
             MilliSeconds = (int) (UpdateTime % 1000);
             milliSecond = String.valueOf(MilliSeconds);
 
+            //System.out.println("Mohseen : Milliseconds " + milliSecond);
             if(milliSecond.length()>2){
                 txtStopWatch.setText(String.format("%02d", Minutes)  + ":"
                         + String.format("%02d", Seconds) + ":"
                         + milliSecond.substring(0,2) );
             }
             else if(milliSecond.length()==1){
-               // System.out.println("Mohseen : Milliseconds " + milliSecond);
+
                 txtStopWatch.setText(String.format("%02d", Minutes)  + ":"
                         + String.format("%02d", Seconds) + ":0"
                         + milliSecond);
