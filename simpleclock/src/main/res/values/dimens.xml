@@ -13,5 +13,6 @@ http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
     <dimen name="battery_ImgSize">60dp</dimen>
     <dimen name="batteryText_textSize">18sp</dimen>
     <dimen name="constLayout_Day">230dp</dimen>
+    <dimen name="margin_to_reset_btn">20dp</dimen>
 
 </resources>

@@ -5,8 +5,10 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -44,6 +46,8 @@ public class StopClockActivity extends AppCompatActivity {
     private final String PAUSE = "Pause";
     private final String RESUME = "Resume";
 
+    TextView listInnerTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +73,11 @@ public class StopClockActivity extends AppCompatActivity {
         createMainClockButon();
         createReset();
 
-        //setTextSizes();
+        listInnerTextView = new TextView(getApplicationContext());
+        listInnerTextView.setTextColor(Color.WHITE);
+        listInnerTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP,25);
+        listInnerTextView.setGravity(Gravity.CENTER);
+        setTextSizes();
     }
 
     @Override
@@ -112,10 +120,11 @@ public class StopClockActivity extends AppCompatActivity {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view =super.getView(position, convertView, parent);
-                TextView textView=(TextView) view.findViewById(android.R.id.text1);
-                textView.setTextColor(Color.WHITE);
-                textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,25);
-                textView.setGravity(Gravity.CENTER);
+                /*view.findViewById(android.R.id.text1). = listInnerTextView;*/
+                listInnerTextView =(TextView) view.findViewById(android.R.id.text1);
+                listInnerTextView.setTextColor(Color.WHITE);
+                listInnerTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP,25);
+                listInnerTextView.setGravity(Gravity.CENTER);
                 return view;
             }
         };
@@ -186,6 +195,7 @@ public class StopClockActivity extends AppCompatActivity {
         btnStopWatchPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //listInnerTextView.setTextSize(100);
                 playBtnClick(btnStopWatchPlay.getText().toString());
             }
         });
@@ -256,24 +266,52 @@ public class StopClockActivity extends AppCompatActivity {
 
     };
 
-    /*public void setTextSizes(){
-        System.out.println("Mohseen : setTextSizes "+ config.orientation + " : " + width + " : " +height);
+    public void setTextSizes(){
+        //System.out.println("Mohseen : setTextSizes "+ config.orientation + " : " + width + " : " +height);
 
         if(config.orientation == 1) {
 
-            if(width <= 350) {
-                final int size = 14;
-                btnStopWatchClock.setTextSize(size);
-                btnStopWatchPlay.setTextSize(size);
-                btnLap.setTextSize(size);
-                btnStopWatchReset.setTextSize(size);
-            } else if(width > 350) {
-                final int size = 24;
+            if(width > 550 && height > 700) {
+                final int size = 32;
+                txtStopWatch.setTextSize(120);
+                if(listInnerTextView != null) {
+                    listInnerTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, size);
+                }
+
+                btnStopWatchPlay.setTextSize(size+10);
+
                     btnStopWatchClock.setTextSize(size);
-                    btnStopWatchPlay.setTextSize(size);
                     btnLap.setTextSize(size);
                     btnStopWatchReset.setTextSize(size);
                 }
+        } else {
+
+            if(width < 430 && height < 300) {
+                final int size = 20;
+                txtStopWatch.setTextSize(50);
+                //System.out.println("Mohseen Width : " + listView.getWidth());
+                listView.getLayoutParams().width = 110;
+                btnStopWatchPlay.getLayoutParams().width = 120;
+                btnLap.setTextSize(size+20);
+                btnStopWatchClock.getLayoutParams().width = 50;
+                btnLap.getLayoutParams().width = 50;
+                btnStopWatchReset.getLayoutParams().width = 70;
+                btnStopWatchClock.setTextSize(size);
+                btnLap.setTextSize(size);
+                btnStopWatchReset.setTextSize(size);
+            }
+
+            if(width > 800 && height > 500) {
+                final int size = 28;
+                txtStopWatch.setTextSize(120);
+                if(listInnerTextView != null) {
+                    listInnerTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, size);
+                }
+                btnStopWatchPlay.setTextSize(size+15);
+                btnStopWatchClock.setTextSize(size);
+                btnLap.setTextSize(size);
+                btnStopWatchReset.setTextSize(size);
+            }
         }
-    }*/
+    }
 }
