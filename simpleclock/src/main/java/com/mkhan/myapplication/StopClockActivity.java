@@ -19,6 +19,10 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
 import java.util.ArrayList;
 
 public class StopClockActivity extends AppCompatActivity {
@@ -66,6 +70,13 @@ public class StopClockActivity extends AppCompatActivity {
 
         txtStopWatch = (TextView) findViewById(R.id.txtStopWatch);
         handler = new Handler();
+
+        MobileAds.initialize(getApplicationContext(), getResources().getString(R.string.banner_ad_unit_id_1));
+        AdView mAdView1 = (AdView) findViewById(R.id.adView1);
+        //mAdView1.setVisibility(View.INVISIBLE);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adRequest.isTestDevice(this);
+        mAdView1.loadAd(adRequest);
 
         createPlay();
         createLapList();
@@ -141,7 +152,9 @@ public class StopClockActivity extends AppCompatActivity {
         btnStopWatchClock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
                 //finish();
             }
         });
