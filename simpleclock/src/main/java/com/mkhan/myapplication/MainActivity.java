@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
         MobileAds.initialize(getApplicationContext(), getResources().getString(R.string.banner_ad_unit_id_1));
         AdView mAdView1 = (AdView) findViewById(R.id.adView1);
-        //mAdView1.setVisibility(View.INVISIBLE);
+        mAdView1.setVisibility(View.INVISIBLE);
 
         AdRequest adRequest = new AdRequest.Builder().build();
         adRequest.isTestDevice(this);
@@ -130,6 +130,20 @@ public class MainActivity extends AppCompatActivity {
         batteryImage = (ImageView) findViewById(R.id.batteryImage);
         batteryImage.setMaxWidth(batteryText.getWidth());
         batteryImage.setMaxHeight(batteryText.getHeight());
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();  // Always call the superclass method first
+        unregisterReceiver(this.mBatInfoReceiver);
+        //System.out.println("Mohseen On Pause ");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();  // Always call the superclass method first
+        //System.out.println("Mohseen onResume ");
+        registerReceiver(mBatInfoReceiver, batteryFilter);
     }
 
     private BroadcastReceiver mBatInfoReceiver = new BroadcastReceiver(){
