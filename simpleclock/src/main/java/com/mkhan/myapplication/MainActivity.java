@@ -90,12 +90,11 @@ public class MainActivity extends AppCompatActivity {
         initializeBattery();
 
         stopClockIntent = new Intent(getApplicationContext(), StopClockActivity.class);
-
+        stopClockIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         btnStopWatch = (Button) findViewById(R.id.btnStopWatch);
         btnStopWatch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 startActivity(stopClockIntent);
             }
         });

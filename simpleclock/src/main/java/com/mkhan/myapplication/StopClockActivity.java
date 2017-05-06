@@ -71,13 +71,6 @@ public class StopClockActivity extends AppCompatActivity {
         txtStopWatch = (TextView) findViewById(R.id.txtStopWatch);
         handler = new Handler();
 
-        MobileAds.initialize(getApplicationContext(), getResources().getString(R.string.banner_ad_unit_id_1));
-        AdView mAdView1 = (AdView) findViewById(R.id.adView1);
-        //mAdView1.setVisibility(View.INVISIBLE);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        adRequest.isTestDevice(this);
-        mAdView1.loadAd(adRequest);
-
         createPlay();
         createLapList();
         createLapButton();
