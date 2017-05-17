@@ -244,10 +244,10 @@ public class MainActivity extends AppCompatActivity {
         GradientDrawable gd = (GradientDrawable) mainConstraintLayout.getBackground();
         gd.setColor(Color.parseColor(color));
         int width_px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, getResources().getDisplayMetrics());
-        if("fff3300".equalsIgnoreCase(color)){
-            gd.setStroke(width_px, Color.BLACK);
+        if("#000000".equalsIgnoreCase(color)){
+            gd.setStroke(width_px, Color.WHITE);
         } else {
-            gd.setStroke(width_px, Color.RED);
+            gd.setStroke(width_px, Color.BLACK);
         }
     }
 

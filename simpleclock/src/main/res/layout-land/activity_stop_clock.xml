@@ -124,7 +124,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/border_resource"
-        android:divider="#FF0000"
+        android:divider="@color/colorGreen"
         android:dividerHeight="1dp"
         android:footerDividersEnabled="true"
         android:headerDividersEnabled="true"

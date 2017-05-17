@@ -13,7 +13,7 @@
     <string-array name="pref_backgrnd_color_titles">
         <item>Yellow</item>
         <item>Black</item>
-        <item>Red</item>
+        <item>Blue Grey</item>
         <item>Blue</item>
         <item>Brown</item>
         <item>Purple</item>
@@ -21,7 +21,7 @@
     <string-array name="pref_backgrnd_color_values">
         <item>#cca300</item>
         <item>#000000</item>
-        <item>#ff3300</item>
+        <item>#607D8B</item>
         <item>#1b62d3</item>
         <item>#bf8040</item>
         <item>#e600e6</item>
