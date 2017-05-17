@@ -1,7 +1,38 @@
 <resources>
-    <string name="app_name">Simple Digital Clock with Stopwatch</string>
+    <string name="app_name">Digital Clock</string>
     <string name="banner_ad_unit_id_1">ca-app-pub-1322448895447717/9531904783</string>
     <string name="date_constant">Date</string>
     <string name="saturday">Saturday</string>
-    <string name="font_family_text">serif</string>
+    <string name="title_activity_settings">Settings</string>
+    <!-- Strings related to Settings -->
+
+    <!-- Example General settings -->
+    <string name="pref_background_title">Background Color</string>
+
+
+    <string-array name="pref_backgrnd_color_titles">
+        <item>Yellow</item>
+        <item>Black</item>
+        <item>Red</item>
+        <item>Blue</item>
+        <item>Brown</item>
+        <item>Purple</item>
+    </string-array>
+    <string-array name="pref_backgrnd_color_values">
+        <item>#cca300</item>
+        <item>#000000</item>
+        <item>#ff3300</item>
+        <item>#1b62d3</item>
+        <item>#bf8040</item>
+        <item>#e600e6</item>
+    </string-array>
+
+    <!-- Example settings for Data & Sync -->
+
+    <!-- Example settings for Notifications -->
+
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="pref_background_color">pref_background_color</string>
+    <string name="pref_text_color_title">Dark Text</string>
+    <string name="pref_text_color">pref_text_color</string>
 </resources>

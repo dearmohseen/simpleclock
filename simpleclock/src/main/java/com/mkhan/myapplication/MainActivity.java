@@ -1,13 +1,23 @@
 package com.mkhan.myapplication;
 
+import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
+import android.net.Uri;
 import android.os.BatteryManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.TypedValue;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -39,6 +49,9 @@ public class MainActivity extends AppCompatActivity {
     private ImageView batteryImage;
     private Button btnStopWatch;
     private Intent stopClockIntent;
+
+    AdView mAdView1;
+    public SharedPreferences sharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         MobileAds.initialize(getApplicationContext(), getResources().getString(R.string.banner_ad_unit_id_1));
-        AdView mAdView1 = (AdView) findViewById(R.id.adView1);
+        mAdView1 = (AdView) findViewById(R.id.adView1);
         mAdView1.setVisibility(View.INVISIBLE);
 
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -98,7 +111,53 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(stopClockIntent);
             }
         });
+
+        prepareSharedPreference();
+        updateBackgroundColor();
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        //Handle item selection
+        switch (item.getItemId()) {
+            case R.id.action_rate_app:
+                //System.out.println("Mohseen : Rate App Clicked ");
+                rateApp();
+                return true;
+            case R.id.action_settings:
+                //System.out.println("Mohseen : Action setting Clicked ");
+                this.startActivity(new Intent(this,SettingsActivity.class));
+                return true;
+            default:
+                this.startActivity(new Intent(this,SettingsActivity.class));
+                return true;
+        }
+    }
+
+    private void rateApp(){
+        Uri uri = Uri.parse("market://details?id=" + this.getPackageName());
+        Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+        // To count with Play market backstack, After pressing back button,
+        // to taken back to our application, we need to add following flags to intent.
+        goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
+                Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
+                Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+        try {
+            startActivity(goToMarket);
+        } catch (ActivityNotFoundException e) {
+            startActivity(new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("http://play.google.com/store/apps/details?id=" + this.getPackageName())));
+        }
+    }
+
 
     private void setTextSizes(){
         //System.out.println("Mohseen : setTextSizes " + width + " : " +height);
@@ -136,6 +195,7 @@ public class MainActivity extends AppCompatActivity {
     public void onPause() {
         super.onPause();  // Always call the superclass method first
         unregisterReceiver(this.mBatInfoReceiver);
+        mAdView1.pause();
         //System.out.println("Mohseen On Pause ");
     }
 
@@ -143,6 +203,8 @@ public class MainActivity extends AppCompatActivity {
     public void onResume() {
         super.onResume();  // Always call the superclass method first
         //System.out.println("Mohseen onResume ");
+        mAdView1.resume();
+        updateBackgroundColor();
         registerReceiver(mBatInfoReceiver, batteryFilter);
     }
 
@@ -176,6 +238,23 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    private void updateBackgroundColor(){
+        String color = sharedPref.getString(getString(R.string.pref_background_color),"#000000");
+        ConstraintLayout mainConstraintLayout = (ConstraintLayout) findViewById(R.id.mainConstraintLayout);
+        GradientDrawable gd = (GradientDrawable) mainConstraintLayout.getBackground();
+        gd.setColor(Color.parseColor(color));
+        int width_px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, getResources().getDisplayMetrics());
+        if("fff3300".equalsIgnoreCase(color)){
+            gd.setStroke(width_px, Color.BLACK);
+        } else {
+            gd.setStroke(width_px, Color.RED);
+        }
+    }
+
+
+    public void prepareSharedPreference(){
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+    }
 }
 
 
