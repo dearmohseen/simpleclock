@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
 
         MobileAds.initialize(getApplicationContext(), getResources().getString(R.string.banner_ad_unit_id_1));
         mAdView1 = (AdView) findViewById(R.id.adView1);
-        mAdView1.setVisibility(View.INVISIBLE);
+        //mAdView1.setVisibility(View.INVISIBLE);
 
         AdRequest adRequest = new AdRequest.Builder().build();
         adRequest.isTestDevice(this);
@@ -135,6 +135,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_settings:
                 //System.out.println("Mohseen : Action setting Clicked ");
                 this.startActivity(new Intent(this,SettingsActivity.class));
+                return true;
+            case R.id.action_timer:
+                this.startActivity(new Intent(this,TimerActivity.class));
                 return true;
             default:
                 this.startActivity(new Intent(this,SettingsActivity.class));
@@ -193,10 +196,18 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onPause() {
-        super.onPause();  // Always call the superclass method first
         unregisterReceiver(this.mBatInfoReceiver);
         mAdView1.pause();
+        super.onPause();  // Always call the superclass method first
         //System.out.println("Mohseen On Pause ");
+    }
+
+    @Override
+    public void onDestroy() {
+        unregisterReceiver(this.mBatInfoReceiver);
+        mAdView1.destroy();
+        super.onDestroy();  // Always call the superclass method first
+        //System.out.println("Mohseen On onDestroy ");
     }
 
     @Override

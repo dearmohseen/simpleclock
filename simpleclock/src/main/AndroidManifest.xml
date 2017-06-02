@@ -24,6 +24,13 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".TimerActivity"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity
             android:name=".StopClockActivity"
             android:parentActivityName=".MainActivity">
             <meta-data

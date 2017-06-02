@@ -46,9 +46,7 @@ public class StopClockActivity extends AppCompatActivity {
     ArrayAdapter<String> adapter ;
     private Configuration config;
     private int width , height;
-    private final String START = "Start";
-    private final String PAUSE = "Pause";
-    private final String RESUME = "Resume";
+
 
     TextView listInnerTextView;
 
@@ -110,7 +108,7 @@ public class StopClockActivity extends AppCompatActivity {
 
        //System.out.println("Mohseen : onRestoreInstanceState btnStopWatchPlay - " +  btnPlayText);
 
-        if(PAUSE.equalsIgnoreCase(btnPlayText)){
+        if(ClockUtility.PAUSE.equalsIgnoreCase(btnPlayText)){
             handler.postDelayed(runnable, 0);
         }
     }
@@ -171,7 +169,7 @@ public class StopClockActivity extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
                 handler.removeCallbacks(runnable);
                 txtStopWatch.setText("00:00:00");
-                btnStopWatchPlay.setText(START);
+                btnStopWatchPlay.setText(ClockUtility.START);
                 btnLap.setEnabled(false);
 
             }
@@ -223,17 +221,17 @@ public class StopClockActivity extends AppCompatActivity {
     public void toggleStartPauseText(String btnPlayText){
        // System.out.println("Mohseen : toggleStartPauseText - " + btnPlayText);
 
-        if(btnPlayText.equals(START)){
-            btnStopWatchPlay.setText(PAUSE);
+        if(btnPlayText.equals(ClockUtility.START)){
+            btnStopWatchPlay.setText(ClockUtility.PAUSE);
             btnLap.setEnabled(true);
-        } else if(btnPlayText.equals(PAUSE)){
-            btnStopWatchPlay.setText(RESUME);
+        } else if(btnPlayText.equals(ClockUtility.PAUSE)){
+            btnStopWatchPlay.setText(ClockUtility.RESUME);
             TimeBuff += MillisecondTime;
             btnLap.setEnabled(false);
             handler.removeCallbacks(runnable);
         }  else{
             btnLap.setEnabled(true);
-            btnStopWatchPlay.setText(PAUSE);
+            btnStopWatchPlay.setText(ClockUtility.PAUSE);
         }
 
     }

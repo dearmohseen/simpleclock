@@ -4,13 +4,19 @@
     tools:context="com.mkhan.chargingcurrent.MainActivity">
 
     <item
+        android:id="@+id/action_timer"
+        android:orderInCategory="1"
+        android:title="Timer"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_timer_black_24dp"/>
+    <item
         android:id="@+id/action_settings"
-        android:orderInCategory="100"
+        android:orderInCategory="2"
         android:title="Settings"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_rate_app"
-        android:orderInCategory="100"
-        android:title="Like it. Please Rate It."
+        android:orderInCategory="3"
+        android:title="Like it. Please Rate It!"
         app:showAsAction="never" />
 </menu>

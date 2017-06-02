@@ -5,7 +5,7 @@ android {
         config {
             keyAlias 'MyKey'
             keyPassword 'britney123'
-            storeFile file('/home/ayaan/development/mkkeystore.jks')
+            storeFile file('C:\\mohseen\\android\\keystore\\mkkeystore.jks')
             storePassword 'britney123'
         }
     }
@@ -15,8 +15,8 @@ android {
         applicationId "com.mkhan.myapplication"
         minSdkVersion 17
         targetSdkVersion 25
-        versionCode 12
-        versionName "1.5"
+        versionCode 14
+        versionName "2.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.config
         vectorDrawables.useSupportLibrary = true
