@@ -14,19 +14,28 @@
         ads:adSize="BANNER"
         ads:adUnitId="@string/banner_ad_unit_id_1"
         ads:layout_constraintRight_toRightOf="parent"
-        ads:layout_constraintTop_toTopOf="parent" />
+        ads:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="3dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        ads:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp" />
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        ads:layout_constraintBottom_toTopOf="@+id/tableLayout"
         ads:layout_constraintLeft_toLeftOf="parent"
         ads:layout_constraintRight_toRightOf="parent"
-        ads:layout_constraintTop_toBottomOf="@+id/adView">
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        ads:layout_constraintTop_toBottomOf="@+id/adView"
+        android:id="@+id/relativeLayout"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        ads:layout_constraintBottom_toTopOf="@+id/tableRow">
 
         <ProgressBar
             android:id="@+id/progressBarTimer"
@@ -40,22 +49,108 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:max="100"
+            android:indeterminate="true"
             ads:layout_constraintLeft_toLeftOf="parent"
             ads:layout_constraintRight_toRightOf="parent"
-            tools:visibility="invisible" />
+            android:visibility="gone"
+            />
 
-        <Chronometer
-            android:id="@+id/chronometer"
+        <TextView
+            android:id="@+id/txtTimerValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
             android:text="00:00:00"
-            android:textColor="@color/colorAccent"
-            android:textSize="24sp"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="0dp" />
+            android:textAlignment="center"
+            android:textColor="@color/colorTextWhite"
+            android:textSize="50sp" />
+
     </RelativeLayout>
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp"
+        android:paddingTop="10dp"
+        android:layout_marginRight="8dp"
+        ads:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="8dp"
+        ads:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:id="@+id/tableRow"
+        android:layout_marginBottom="8dp"
+        ads:layout_constraintBottom_toTopOf="@+id/tableLayout"
+        android:layout_marginTop="8dp"
+        ads:layout_constraintTop_toBottomOf="@+id/adView"
+        ads:layout_constraintVertical_bias="0.7">
+
+        <com.mkhan.myapplication.MyNumberPicker
+            android:id="@+id/numberPickerHour"
+            android:layout_width="wrap_content"
+            android:layout_height="120dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:theme="@style/AppTheme.Picker" />
+
+        <com.mkhan.myapplication.MyNumberPicker
+            android:id="@+id/numberPickerMinutes"
+            android:layout_width="wrap_content"
+            android:layout_height="120dp"
+            android:theme="@style/AppTheme.Picker" />
+
+        <com.mkhan.myapplication.MyNumberPicker
+            android:id="@+id/numberPickerSeconds"
+            android:layout_width="wrap_content"
+            android:layout_height="120dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:theme="@style/AppTheme.Picker" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        ads:layout_constraintRight_toRightOf="@+id/tableRow"
+        android:layout_marginLeft="8dp"
+        ads:layout_constraintLeft_toLeftOf="@+id/tableRow"
+        android:id="@+id/tableRow2"
+        android:layout_marginTop="8dp"
+        ads:layout_constraintTop_toBottomOf="@+id/tableRow"
+        android:layout_marginBottom="8dp"
+        ads:layout_constraintBottom_toTopOf="@+id/tableLayout"
+        ads:layout_constraintVertical_bias="0.01999998">
+
+        <TextView
+            android:id="@+id/txtHourLabel"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:text="HR"
+            android:textAlignment="center"
+            android:textColor="@color/colorBtnText"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtMinutesLabel"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:text="Min"
+            android:textAlignment="center"
+            android:textColor="@color/colorBtnText"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtSecondsLabel"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:text="Sec"
+            android:textAlignment="center"
+            android:textColor="@color/colorBtnText"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </TableRow>
 
     <TableLayout
         android:id="@+id/tableLayout"

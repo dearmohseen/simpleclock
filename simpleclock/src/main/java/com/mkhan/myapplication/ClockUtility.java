@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.provider.CalendarContract;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -63,6 +64,10 @@ import java.util.Locale;
         });
 
         return  btnBackToMainClock;
+    }
+
+    public static void displayToast(Context context,String message) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 
 }
