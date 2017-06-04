@@ -208,10 +208,10 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         } else {
             sbTextValue.append(String.format("%02d",timerSec));
         }
-        Log.d(this.getLocalClassName() + " Mohseen ", sbTextValue.toString() );
+        //Log.d(this.getLocalClassName() + " Mohseen ", sbTextValue.toString() );
 
         txtTimerValue.setText(sbTextValue.toString());
-        Log.d(this.getLocalClassName() + " Mohseen 1", txtTimerValue.getText().toString() );
+       // Log.d(this.getLocalClassName() + " Mohseen 1", txtTimerValue.getText().toString() );
 
     }
 
@@ -235,7 +235,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onTick(long milliTillFinish) {
 
-               Log.d("Mohseen",Long.toString(milliTillFinish/1000));
+               //Log.d("Mohseen",Long.toString(milliTillFinish/1000));
                 milliLeft = milliTillFinish;
                 timerHour = TimeUnit.MILLISECONDS.toHours(milliTillFinish);
                 timerMinute = TimeUnit.MILLISECONDS.toMinutes(milliLeft) - TimeUnit.HOURS.toMinutes(timerHour);
@@ -251,6 +251,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
 
             public void onFinish() {
                 txtTimerValue.setText("Times Up!");
+                ClockUtility.playAlarmSound(getBaseContext());
                 btnTimerPlay.setText(ClockUtility.START);
             }
         }.start();
@@ -262,16 +263,14 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void timerResume() {
-        System.out.println("Mohseen : timerResume - milliLeft : " + milliLeft );
-        //if(timer == null) {
-            timerStart(milliLeft);
-        //}
+        //System.out.println("Mohseen : timerResume - milliLeft : " + milliLeft );
+       timerStart(milliLeft);
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        System.out.println("Mohseen : onSaveInstanceState - StartTime : " + txtTimerValue.getText() );
+        //System.out.println("Mohseen : onSaveInstanceState - StartTime : " + txtTimerValue.getText() );
         outState.putString("timerValue",txtTimerValue.getText().toString());
         outState.putInt("inputHour",hours);
         outState.putInt("inputMinutes",minutes);
@@ -309,7 +308,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     public void onPause() {
         mAdView.pause();
         super.onPause();
-        System.out.println("Mohseen TimerActivity : onPause ");
+        //System.out.println("Mohseen TimerActivity : onPause ");
     }
 
     @Override
@@ -317,16 +316,16 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         mAdView.destroy();
         timer.cancel();
         super.onDestroy();
-        System.out.println("Mohseen TimerActivity : onDestroy ");
+        //System.out.println("Mohseen TimerActivity : onDestroy ");
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        System.out.println("Mohseen TimerActivity : onResume ");
+        //System.out.println("Mohseen TimerActivity : onResume ");
         mAdView.resume();
         //timerResume();
-        //updateBackgroundColor();
+        updateBackgroundColor();
     }
 
 
@@ -336,14 +335,10 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         if(config.orientation == 1) {
 
             //mProgress.getLayoutParams().width = width + 100;
-                /*if(width > 375) {
+                if(width > 375) {
                     int size = 200;
-                    textClock.setTextSize(130);
-                    textViewDay.setTextSize(44);
-                    textClockAM.setTextSize(28);
-                    textClockSeconds.setTextSize(28);
-                    textViewDate.setTextSize(24);
-                }*/
+                    txtTimerValue.setTextSize(size);
+                }
 
         }
     }
