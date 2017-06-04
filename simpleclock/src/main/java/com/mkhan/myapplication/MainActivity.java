@@ -109,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
         btnStopWatch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                System.out.println("Mohseen btnStopWatch.onClick ");
                 startActivity(stopClockIntent);
             }
         });

@@ -25,6 +25,7 @@
         </activity>
         <activity
             android:name=".TimerActivity"
+            android:label="@string/title_timer"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -32,6 +33,7 @@
         </activity>
         <activity
             android:name=".StopClockActivity"
+            android:label="@string/title_stopwatch"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

@@ -157,32 +157,10 @@
 
         android:layout_marginRight="16dp"
         ads:layout_constraintRight_toRightOf="parent"
-        ads:layout_constraintTop_toTopOf="@+id/btnStopWatch"
-        android:layout_marginTop="0dp" />
+        tools:layout_editor_absoluteY="491dp" />
 
     <Button
         android:id="@+id/btnStopWatch"
-        style="@style/MyButtonStyleGreen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:paddingRight="16dp"
-        android:paddingLeft="16dp"
-        android:text="Stopwatch"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        android:textStyle="normal"
-        ads:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginLeft="8dp"
-        ads:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="8dp"
-        ads:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
-        ads:layout_constraintVertical_bias="0.68" />
-
-    <Button
-        android:id="@+id/btn"
         style="@style/MyButtonStyleGreen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
