@@ -14,29 +14,25 @@
         android:layout_height="wrap_content"
         ads:adSize="BANNER"
         ads:adUnitId="@string/banner_ad_unit_id_1"
-        ads:layout_constraintRight_toRightOf="parent"
         ads:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="3dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        ads:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="0dp"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp" />
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="0dp"
+        ads:layout_constraintLeft_toLeftOf="parent" />
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        ads:layout_constraintLeft_toLeftOf="parent"
-        ads:layout_constraintRight_toRightOf="parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
         ads:layout_constraintTop_toBottomOf="@+id/adView"
         android:id="@+id/relativeLayout"
         android:layout_marginTop="0dp"
-        android:layout_marginBottom="0dp"
-        ads:layout_constraintBottom_toTopOf="@+id/tableRow">
+        android:layout_marginBottom="8dp"
+        ads:layout_constraintBottom_toTopOf="@+id/tableLayout"
+        android:layout_marginLeft="8dp"
+        ads:layout_constraintLeft_toLeftOf="parent"
+        ads:layout_constraintRight_toLeftOf="@+id/tableRow"
+        android:layout_marginRight="8dp">
 
         <ProgressBar
             android:id="@+id/progressBarTimer"
@@ -72,18 +68,15 @@
         android:layout_height="wrap_content"
         android:paddingBottom="20dp"
         android:paddingTop="10dp"
-        android:layout_marginRight="8dp"
-        ads:layout_constraintRight_toRightOf="parent"
-        android:layout_marginLeft="8dp"
-        ads:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:id="@+id/tableRow"
         android:layout_marginBottom="8dp"
         ads:layout_constraintBottom_toTopOf="@+id/tableLayout"
+        android:layout_marginRight="8dp"
+        ads:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="8dp"
-        ads:layout_constraintTop_toBottomOf="@+id/adView"
-        ads:layout_constraintVertical_bias="0.7">
+        ads:layout_constraintTop_toBottomOf="@+id/tableRow2">
 
         <com.mkhan.myapplication.MyNumberPicker
             android:id="@+id/numberPickerHour"
@@ -116,11 +109,8 @@
         android:layout_marginLeft="8dp"
         ads:layout_constraintLeft_toLeftOf="@+id/tableRow"
         android:id="@+id/tableRow2"
-        android:layout_marginTop="0dp"
-        ads:layout_constraintTop_toBottomOf="@+id/tableRow"
-        android:layout_marginBottom="0dp"
-        ads:layout_constraintBottom_toTopOf="@+id/tableLayout"
-        ads:layout_constraintVertical_bias="0.01999998">
+        android:layout_marginTop="8dp"
+        ads:layout_constraintTop_toBottomOf="@+id/adView">
 
         <TextView
             android:id="@+id/txtHourLabel"

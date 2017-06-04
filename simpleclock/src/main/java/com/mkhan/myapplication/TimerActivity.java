@@ -1,12 +1,19 @@
 package com.mkhan.myapplication;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.SystemClock;
+import android.preference.PreferenceManager;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
@@ -17,20 +24,23 @@ import android.widget.TextView;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.common.SignInButton;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by khanm on 4/21/2017.
  */
 
-public class TimerActivity extends Activity implements View.OnClickListener {
+public class TimerActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Timer myTimer;
     AdView mAdView;
     private Configuration config;
     private int width , height;
+    public SharedPreferences sharedPref;
 
     private int hours, minutes, seconds;
     MyNumberPicker numberPickerHour , numberPickerMinute , numberPickerSecond;
@@ -54,6 +64,8 @@ public class TimerActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_timer);
         initializeAdUnit();
         initializeComponents();
+        prepareSharedPreference();
+        updateBackgroundColor();
         setTextSizes();
     }
 
@@ -123,26 +135,27 @@ public class TimerActivity extends Activity implements View.OnClickListener {
     }
 
     private long calculateInputTime(){
+        Log.d(this.getLocalClassName(),"calculateInputTime " + hours + ":" + minutes + ":" + seconds);
         long inputTime = 0;
         if(hours > 0){
             inputTime = hours * 3600;
         }
         if(minutes > 0){
             if(inputTime > 0){
-                inputTime = inputTime * minutes * 60;
+                inputTime = inputTime +  minutes * 60;
             } else {
-                inputTime = minutes * 60;
+                inputTime = minutes * 60 ;
             }
         }
         if(seconds > 0){
             if(inputTime > 0){
-                inputTime = inputTime * seconds;
+                inputTime = inputTime + seconds;
             } else {
                 inputTime = seconds;
             }
 
         }
-
+        Log.d(this.getLocalClassName()," Input Time " + inputTime * 1000);
         return inputTime * 1000;
     }
 
@@ -150,15 +163,7 @@ public class TimerActivity extends Activity implements View.OnClickListener {
         if(btn.getText().equals(ClockUtility.START)){
            long inputTime = calculateInputTime();
            if(inputTime > 0 ) {
-               timerStart(inputTime + 1000);
-            /*if ( mLastStopTime == 0 ) {
-                //chronometer.setBase( SystemClock.elapsedRealtime() + 10);
-                timerStart(300000);
-            }
-            else {
-                long intervalOnPause = (SystemClock.elapsedRealtime() - mLastStopTime);
-                timerResume();
-            }*/
+               timerStart(inputTime);
                btnTimerPlay.setText(ClockUtility.PAUSE);
            } else {
                ClockUtility.displayToast(getApplicationContext(),"Please Select Timer Value");
@@ -166,11 +171,9 @@ public class TimerActivity extends Activity implements View.OnClickListener {
         } else if(btn.getText().equals(ClockUtility.PAUSE)){
             //chronometer.stop();
             timerPause();
-            //mLastStopTime = SystemClock.elapsedRealtime();
             btnTimerPlay.setText(ClockUtility.RESUME);
         } else if(btn.getText().equals(ClockUtility.RESUME)){
             timerResume();
-            //mLastStopTime = SystemClock.elapsedRealtime();
             btnTimerPlay.setText(ClockUtility.PAUSE);
         }
         else{
@@ -179,9 +182,6 @@ public class TimerActivity extends Activity implements View.OnClickListener {
     }
 
     private void resetTimer(){
-        //mLastStopTime = 0;
-        //chronometer.stop();
-        //chronometer.setBase(SystemClock.elapsedRealtime());
         if(timer != null){
             timer.cancel();
         }
@@ -192,37 +192,36 @@ public class TimerActivity extends Activity implements View.OnClickListener {
 
     public void updateTimerValueToUI(){
         sbTextValue.delete(0,sbTextValue.length());
-        Log.d(this.getLocalClassName(),timerHour + ":" + timerMinute + ":" + timerSec );
+//        Log.d(this.getLocalClassName(),timerHour + ":" + timerMinute + ":" + timerSec );
         if(timerHour > 0){
-            sbTextValue.append(Long.toString(timerHour) + ":");
+            sbTextValue.append(String.format("%02d:%02d:%02d",timerHour,timerMinute,timerSec));
+
+        } else if(timerMinute > 0){
+            sbTextValue.append(String.format("%02d:%02d",timerMinute,timerSec));
+        } else {
+            sbTextValue.append(String.format("%02d",timerSec));
         }
-        if(timerMinute > 0 || timerHour > 0){
-            sbTextValue.append(Long.toString(timerMinute)+ ":");
-        }
-        //if(timerSec > 0){
-            sbTextValue.append(Long.toString(timerSec));
-        //}
         txtTimerValue.setText(sbTextValue.toString());
     }
 
     public void timerStart(long timeLengthMilli) {
-
-        milliLeft = timeLengthMilli;
-        timerMinute = (timeLengthMilli / (1000 * 60));
-        timerSec = ((timeLengthMilli / 1000) - timerMinute * 60);
-        updateTimerValueToUI();
 
         timer = new CountDownTimer(timeLengthMilli, 1000) {
 
             @Override
             public void onTick(long milliTillFinish) {
 
-                Log.d("Mohseen",Long.toString(milliTillFinish/1000));
+  //              Log.d("Mohseen",Long.toString(milliTillFinish/1000));
                 milliLeft = milliTillFinish;
-                timerMinute = (milliTillFinish / (1000 * 60));
-                timerSec = ((milliTillFinish / 1000) - timerMinute * 60);
-                //txtTimerValue.setText(Long.toString(timerMinute) + ":" + Long.toString(timerSec));
-                updateTimerValueToUI();
+                timerHour = TimeUnit.MILLISECONDS.toHours(milliTillFinish);
+                timerMinute = TimeUnit.MILLISECONDS.toMinutes(milliLeft) - TimeUnit.HOURS.toMinutes(timerHour);
+                timerSec = TimeUnit.MILLISECONDS.toSeconds(milliLeft) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(milliLeft));
+        /*        String hms = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(milliLeft),
+                        TimeUnit.MILLISECONDS.toMinutes(milliLeft) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(milliLeft)),
+                        TimeUnit.MILLISECONDS.toSeconds(milliLeft) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(milliLeft)));
+                //txtTimerValue.setText(hms);
+                Log.d("TimerActivity hms ",hms);
+        */        updateTimerValueToUI();
             }
 
             public void onFinish() {
@@ -230,7 +229,7 @@ public class TimerActivity extends Activity implements View.OnClickListener {
                 btnTimerPlay.setText(ClockUtility.START);
             }
         }.start();
-        //timer.start();
+
     }
 
     public void timerPause() {
@@ -238,28 +237,68 @@ public class TimerActivity extends Activity implements View.OnClickListener {
     }
 
     private void timerResume() {
+        System.out.println("Mohseen : timerResume - milliLeft : " + milliLeft );
         timerStart(milliLeft);
     }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        System.out.println("Mohseen : onSaveInstanceState - StartTime : " + txtTimerValue.getText() );
+        outState.putString("timerValue",txtTimerValue.getText().toString());
+        outState.putInt("inputHour",hours);
+        outState.putInt("inputMinutes",minutes);
+        outState.putInt("inputSeconds",seconds);
+        outState.putString("btnTimerPlay.text",btnTimerPlay.getText().toString());
+        outState.putLong("timerTimeLeft",milliLeft);
+    }
+
+    //This method gets called when orientation changes
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+
+        super.onRestoreInstanceState(savedInstanceState);
+
+        txtTimerValue.setText(savedInstanceState.getString("timerValue"));
+        hours = savedInstanceState.getInt("inputHour");
+        numberPickerHour.setValue(hours);
+        minutes = savedInstanceState.getInt("inputMinutes");
+        numberPickerMinute.setValue(minutes);
+        seconds = savedInstanceState.getInt("inputSeconds");
+        numberPickerSecond.setValue(seconds);
+        System.out.println("Mohseen : onRestoreInstanceState  - HR " + hours + " Min " + minutes + " Sec " + seconds);
+        milliLeft = savedInstanceState.getLong("timerTimeLeft");
+        String btnTimerPlayText = savedInstanceState.getString("btnTimerPlay.text");
+        btnTimerPlay.setText(btnTimerPlayText);
+
+        System.out.println("Mohseen : onRestoreInstanceState btnStopWatchPlay - " +  btnTimerPlayText);
+        if(ClockUtility.PAUSE.equalsIgnoreCase(btnTimerPlayText)){
+            timerResume();
+        }
+    }
+
 
     @Override
     public void onPause() {
         mAdView.pause();
         super.onPause();
-        //System.out.println("Mohseen On Pause ");
+        System.out.println("Mohseen TimerActivity : onPause ");
     }
 
     @Override
     public void onDestroy() {
         mAdView.destroy();
+        timer.cancel();
         super.onDestroy();
-        //System.out.println("Mohseen On onDestroy ");
+        System.out.println("Mohseen TimerActivity : onDestroy ");
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        //System.out.println("Mohseen onResume ");
+        System.out.println("Mohseen TimerActivity : onResume ");
         mAdView.resume();
+        timerResume();
         //updateBackgroundColor();
     }
 
@@ -282,6 +321,19 @@ public class TimerActivity extends Activity implements View.OnClickListener {
         }
     }
 
+    private void updateBackgroundColor(){
+        String color = sharedPref.getString(getString(R.string.pref_background_color),"#000000");
+        ConstraintLayout mainConstraintLayout = (ConstraintLayout) findViewById(R.id.mainConstraintLayout);
+        GradientDrawable gd = (GradientDrawable) mainConstraintLayout.getBackground();
+        gd.setColor(Color.parseColor(color));
+        int width_px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, getResources().getDisplayMetrics());
+        if("#000000".equalsIgnoreCase(color)){
+            gd.setStroke(width_px, Color.WHITE);
+        } else {
+            gd.setStroke(width_px, Color.BLACK);
+        }
+    }
+
     private void initializeAdUnit(){
         MobileAds.initialize(getApplicationContext(), getResources().getString(R.string.banner_ad_unit_id_1));
         mAdView = (AdView) findViewById(R.id.adView);
@@ -292,6 +344,10 @@ public class TimerActivity extends Activity implements View.OnClickListener {
         if(mAdView != null) {
             mAdView.loadAd(adRequest);
         }
+    }
+
+    public void prepareSharedPreference(){
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
     }
 
 }

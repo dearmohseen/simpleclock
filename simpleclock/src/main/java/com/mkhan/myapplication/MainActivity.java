@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -92,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
         MobileAds.initialize(getApplicationContext(), getResources().getString(R.string.banner_ad_unit_id_1));
         mAdView1 = (AdView) findViewById(R.id.adView1);
-        //mAdView1.setVisibility(View.INVISIBLE);
+        mAdView1.setVisibility(View.INVISIBLE);
 
         AdRequest adRequest = new AdRequest.Builder().build();
         adRequest.isTestDevice(this);
@@ -180,13 +181,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openCalendarApp(){
-        Toast.makeText(getBaseContext(),"Opening Calendar", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getBaseContext(),"Opening Calendar", Toast.LENGTH_SHORT).show();
+        ClockUtility.displayToast(getBaseContext(),"Opening Calendar");
         startActivity(ClockUtility.openCalendarApp());
     }
 
     private void initializeBattery(){
         batteryFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
-        batteryStatusIntent = getBaseContext().registerReceiver(this.mBatInfoReceiver, batteryFilter);
+        batteryStatusIntent = getBaseContext().registerReceiver(mBatInfoReceiver, batteryFilter);
         batteryText = (TextView) findViewById(R.id.batteryText);
 
         batteryImage = (ImageView) findViewById(R.id.batteryImage);
@@ -196,24 +198,38 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onPause() {
-        unregisterReceiver(this.mBatInfoReceiver);
+        unregisterBatteryReceiver();
         mAdView1.pause();
         super.onPause();  // Always call the superclass method first
-        //System.out.println("Mohseen On Pause ");
+        System.out.println("Mohseen On Pause ");
+    }
+
+    private void unregisterBatteryReceiver(){
+        System.out.println("Mohseen unregisterBatteryReceiver " + mBatInfoReceiver);
+        if(mBatInfoReceiver != null) {
+            try {
+                unregisterReceiver(mBatInfoReceiver);
+            } catch(Exception e){
+                Log.d(this.getLocalClassName(),"mBatInfoReceiver already unregistered " + e.getMessage());
+            }
+
+        }
     }
 
     @Override
     public void onDestroy() {
-        unregisterReceiver(this.mBatInfoReceiver);
+        System.out.println("Mohseen On onDestroy ");
+        super.onDestroy();
+        unregisterBatteryReceiver();
         mAdView1.destroy();
-        super.onDestroy();  // Always call the superclass method first
-        //System.out.println("Mohseen On onDestroy ");
+          // Always call the superclass method first
+
     }
 
     @Override
     public void onResume() {
+        System.out.println("Mohseen onResume ");
         super.onResume();  // Always call the superclass method first
-        //System.out.println("Mohseen onResume ");
         mAdView1.resume();
         updateBackgroundColor();
         registerReceiver(mBatInfoReceiver, batteryFilter);
