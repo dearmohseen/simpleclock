@@ -1,5 +1,6 @@
 package com.mkhan.myapplication;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -7,13 +8,18 @@ import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
+import android.os.Message;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
@@ -43,7 +49,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     public SharedPreferences sharedPref;
 
     private int hours, minutes, seconds;
-    MyNumberPicker numberPickerHour , numberPickerMinute , numberPickerSecond;
+    NumberPicker numberPickerHour , numberPickerMinute , numberPickerSecond;
     private ProgressBar mProgress;
     private int mProgressStatus = 0;
 
@@ -74,7 +80,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         width = config.screenWidthDp;
         height = config.screenHeightDp;
 
-        numberPickerHour = (MyNumberPicker) findViewById(R.id.numberPickerHour);
+        numberPickerHour = (NumberPicker) findViewById(R.id.numberPickerHour);
         numberPickerHour.setMinValue(0);
         numberPickerHour.setMaxValue(10);
         numberPickerHour.setWrapSelectorWheel(true);
@@ -85,7 +91,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
             }
         });
 
-        numberPickerMinute = (MyNumberPicker) findViewById(R.id.numberPickerMinutes);
+        numberPickerMinute = (NumberPicker) findViewById(R.id.numberPickerMinutes);
         numberPickerMinute.setMinValue(0);
         numberPickerMinute.setMaxValue(59);
         numberPickerMinute.setWrapSelectorWheel(true);
@@ -96,7 +102,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
             }
         });
 
-        numberPickerSecond = (MyNumberPicker) findViewById(R.id.numberPickerSeconds);
+        numberPickerSecond = (NumberPicker) findViewById(R.id.numberPickerSeconds);
         numberPickerSecond.setMinValue(0);
         numberPickerSecond.setMaxValue(59);
         numberPickerSecond.setWrapSelectorWheel(true);
@@ -187,12 +193,13 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         }
 
         txtTimerValue.setText("00:00:00");
+
         btnTimerPlay.setText(ClockUtility.START);
     }
 
     public void updateTimerValueToUI(){
         sbTextValue.delete(0,sbTextValue.length());
-//        Log.d(this.getLocalClassName(),timerHour + ":" + timerMinute + ":" + timerSec );
+        //Log.d(this.getLocalClassName() + " Mohseen ",timerHour + ":" + timerMinute + ":" + timerSec );
         if(timerHour > 0){
             sbTextValue.append(String.format("%02d:%02d:%02d",timerHour,timerMinute,timerSec));
 
@@ -201,7 +208,24 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         } else {
             sbTextValue.append(String.format("%02d",timerSec));
         }
+        Log.d(this.getLocalClassName() + " Mohseen ", sbTextValue.toString() );
+
         txtTimerValue.setText(sbTextValue.toString());
+        Log.d(this.getLocalClassName() + " Mohseen 1", txtTimerValue.getText().toString() );
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        System.out.println("onCreateOptionsMenu : " + actionBar );
+
+        if (actionBar != null) {
+            actionBar.setHomeButtonEnabled(false);      // Disable the button
+            actionBar.setDisplayHomeAsUpEnabled(false); // Remove the left caret
+            actionBar.setDisplayShowHomeEnabled(false); // Remove the icon
+        }
+        return true;
     }
 
     public void timerStart(long timeLengthMilli) {
@@ -211,7 +235,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onTick(long milliTillFinish) {
 
-  //              Log.d("Mohseen",Long.toString(milliTillFinish/1000));
+               Log.d("Mohseen",Long.toString(milliTillFinish/1000));
                 milliLeft = milliTillFinish;
                 timerHour = TimeUnit.MILLISECONDS.toHours(milliTillFinish);
                 timerMinute = TimeUnit.MILLISECONDS.toMinutes(milliLeft) - TimeUnit.HOURS.toMinutes(timerHour);
@@ -219,9 +243,10 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         /*        String hms = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(milliLeft),
                         TimeUnit.MILLISECONDS.toMinutes(milliLeft) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(milliLeft)),
                         TimeUnit.MILLISECONDS.toSeconds(milliLeft) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(milliLeft)));
-                //txtTimerValue.setText(hms);
                 Log.d("TimerActivity hms ",hms);
-        */        updateTimerValueToUI();
+        */
+                updateTimerValueToUI();
+
             }
 
             public void onFinish() {
@@ -238,7 +263,9 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
 
     private void timerResume() {
         System.out.println("Mohseen : timerResume - milliLeft : " + milliLeft );
-        timerStart(milliLeft);
+        //if(timer == null) {
+            timerStart(milliLeft);
+        //}
     }
 
     @Override
@@ -266,12 +293,12 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         numberPickerMinute.setValue(minutes);
         seconds = savedInstanceState.getInt("inputSeconds");
         numberPickerSecond.setValue(seconds);
-        System.out.println("Mohseen : onRestoreInstanceState  - HR " + hours + " Min " + minutes + " Sec " + seconds);
+      //  System.out.println("Mohseen : onRestoreInstanceState  - HR " + hours + " Min " + minutes + " Sec " + seconds);
         milliLeft = savedInstanceState.getLong("timerTimeLeft");
         String btnTimerPlayText = savedInstanceState.getString("btnTimerPlay.text");
         btnTimerPlay.setText(btnTimerPlayText);
 
-        System.out.println("Mohseen : onRestoreInstanceState btnStopWatchPlay - " +  btnTimerPlayText);
+        //System.out.println("Mohseen : onRestoreInstanceState btnStopWatchPlay - " +  btnTimerPlayText);
         if(ClockUtility.PAUSE.equalsIgnoreCase(btnTimerPlayText)){
             timerResume();
         }
@@ -298,7 +325,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         super.onResume();
         System.out.println("Mohseen TimerActivity : onResume ");
         mAdView.resume();
-        timerResume();
+        //timerResume();
         //updateBackgroundColor();
     }
 

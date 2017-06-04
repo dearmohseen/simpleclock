@@ -139,7 +139,9 @@ public class MainActivity extends AppCompatActivity {
                 this.startActivity(new Intent(this,SettingsActivity.class));
                 return true;
             case R.id.action_timer:
-                this.startActivity(new Intent(this,TimerActivity.class));
+                Intent intent = new Intent(this,TimerActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                this.startActivity(intent);
                 return true;
             default:
                 this.startActivity(new Intent(this,SettingsActivity.class));
