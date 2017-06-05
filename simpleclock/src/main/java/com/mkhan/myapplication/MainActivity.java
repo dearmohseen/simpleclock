@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
         MobileAds.initialize(getApplicationContext(), getResources().getString(R.string.banner_ad_unit_id_1));
         mAdView1 = (AdView) findViewById(R.id.adView1);
-        mAdView1.setVisibility(View.INVISIBLE);
+        mAdView1.setVisibility(View.GONE);
 
         AdRequest adRequest = new AdRequest.Builder().build();
         adRequest.isTestDevice(this);
@@ -166,9 +166,6 @@ public class MainActivity extends AppCompatActivity {
                     Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
         }
 
-/*        goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
-                Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
-                Intent.FLAG_ACTIVITY_MULTIPLE_TASK);*/
         try {
             startActivity(goToMarket);
         } catch (ActivityNotFoundException e) {

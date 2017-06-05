@@ -31,6 +31,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -63,7 +64,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     private int mProgressStatus = 0;
 
    // private Chronometer chronometer;
-    private TextView txtTimerValue;
+    private TextView txtTimerValue, txtHourLabel, txtMinuteLabel, txtSecondLabel;
 
     public static boolean isTimerOn = false;
     //long mLastStopTime;
@@ -126,6 +127,9 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         mProgress = (ProgressBar) findViewById(R.id.progressBarTimer);
         //chronometer = (Chronometer) findViewById(R.id.chronometer);
         txtTimerValue = (TextView) findViewById(R.id.txtTimerValue);
+        txtHourLabel = (TextView) findViewById(R.id.txtHourLabel);
+        txtMinuteLabel = (TextView) findViewById(R.id.txtMinutesLabel);
+        txtSecondLabel = (TextView) findViewById(R.id.txtSecondsLabel);
 
         btnBackToMainClock = ClockUtility.createBackToMainClockButton(R.id.btnBackToMainClock,this);
         btnTimerPlay = (Button) findViewById(R.id.btnTimerPlay) ;
@@ -202,7 +206,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
             timer.cancel();
         }
 
-        txtTimerValue.setText("00:00:00");
+        txtTimerValue.setText(R.string.default_timer_value);
 
         btnTimerPlay.setText(ClockUtility.START);
     }
@@ -260,7 +264,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
             }
 
             public void onFinish() {
-                txtTimerValue.setText("Times Up!");
+                txtTimerValue.setText(R.string.timer_time_up);
 
                 playAlarmSound(getBaseContext());
                 btnTimerPlay.setText(ClockUtility.START);
@@ -325,7 +329,9 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onDestroy() {
         mAdView.destroy();
-        timer.cancel();
+        if(timer != null) {
+            timer.cancel();
+        }
         super.onDestroy();
         //System.out.println("Mohseen TimerActivity : onDestroy ");
     }
@@ -340,18 +346,58 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     }
 
 
-    private void setTextSizes(){
-        System.out.println("Mohseen : setTextSizes " + width + " : " +height);
+    private void setTextSizes() {
+        System.out.println("Mohseen : setTextSizes " + width + " : " + height);
 
-        if(config.orientation == 1) {
+        if (config.orientation == 1) {
 
-            //mProgress.getLayoutParams().width = width + 100;
-                if(width > 375) {
-                    int size = 200;
-                    txtTimerValue.setTextSize(size);
+            if (width > 550 && height > 700) {
+                final int size = 32;
+                final int widthInt = 120;
+                txtTimerValue.setTextSize(widthInt);
+                updateTextSize(size,widthInt);
+
+            }
+        } else {
+
+                if (width < 430 && height < 300) {
+                    final int size = 20;
+                    final int widthInt = 70;
+                    txtTimerValue.setTextSize(50);
+                    updateTextSize(size,widthInt);
+                } else if (width > 430 && width < 800 ){
+                    final int size = 20;
+                    final int widthInt = 70;
+                    txtTimerValue.setTextSize(widthInt);
+                    updateTextSize(size,widthInt);
                 }
 
-        }
+                if (width > 800 && height > 500) {
+                    final int size = 32;
+                    final int widthInt = 120;
+                    txtTimerValue.setTextSize(100);
+                    updateTextSize(size,widthInt);
+                }
+
+            }
+    }
+
+    private void updateTextSize(int size, int widthInt){
+        txtHourLabel.setTextSize(size);
+        txtMinuteLabel.setTextSize(size);
+        txtSecondLabel.setTextSize(size);
+        btnBackToMainClock.setTextSize(size);
+        btnTimerPlay.setTextSize(size);
+        btnTimerReset.setTextSize(size);
+
+        numberPickerHour.getLayoutParams().height = 3*widthInt ;
+        numberPickerMinute.getLayoutParams().height = 3*widthInt;
+        numberPickerSecond.getLayoutParams().height = 3*widthInt;
+
+        btnBackToMainClock.getLayoutParams().width = widthInt;
+        btnTimerPlay.getLayoutParams().width = widthInt;
+        btnTimerReset.getLayoutParams().width = widthInt;
+
     }
 
     private void updateBackgroundColor(){
@@ -370,7 +416,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     private void initializeAdUnit(){
         MobileAds.initialize(getApplicationContext(), getResources().getString(R.string.banner_ad_unit_id_1));
         mAdView = (AdView) findViewById(R.id.adView);
-        //mAdView1.setVisibility(View.INVISIBLE);
+        mAdView.setVisibility(View.GONE);
 
         AdRequest adRequest = new AdRequest.Builder().build();
         adRequest.isTestDevice(this);

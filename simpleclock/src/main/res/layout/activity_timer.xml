@@ -60,7 +60,7 @@
             android:id="@+id/txtTimerValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="00:00:00"
+            android:text="@string/default_timer_value"
 
             android:textAlignment="center"
             android:textColor="@color/colorTextWhite"
@@ -130,7 +130,7 @@
             android:id="@+id/txtHourLabel"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:text="HR"
+            android:text="@string/hr_label"
             android:textAlignment="center"
             android:textColor="@color/colorBtnText"
             android:textSize="18sp"
@@ -140,7 +140,7 @@
             android:id="@+id/txtMinutesLabel"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:text="Min"
+            android:text="@string/min_label"
             android:textAlignment="center"
             android:textColor="@color/colorBtnText"
             android:textSize="18sp"
@@ -150,7 +150,7 @@
             android:id="@+id/txtSecondsLabel"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:text="Sec"
+            android:text="@string/sec_label"
             android:textAlignment="center"
             android:textColor="@color/colorBtnText"
             android:textSize="18sp"
@@ -180,9 +180,8 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_toLeftOf="@+id/btnStopWatchReset"
                 android:fontFamily="serif"
-                android:text="Back"
+                android:text="@string/back_label"
                 android:textColor="@android:color/background_light"
                 android:textSize="24sp" />
 
@@ -192,7 +191,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="serif"
-                android:text="Start"
+                android:text="@string/start_label"
                 android:textSize="24sp" />
 
             <Button
@@ -204,7 +203,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginStart="8dp"
-                android:text="Reset"
+                android:text="@string/reset_label"
                 android:textColor="@android:color/background_light"
                 android:textSize="24sp" />
         </TableRow>

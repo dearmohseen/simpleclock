@@ -8,4 +8,5 @@
     <dimen name="battery_ImgSize">60dp</dimen>
     <dimen name="batteryText_textSize">20sp</dimen>
     <dimen name="constLayout_Day">120dp</dimen>
+    <dimen name="numberpicker_text_size">28sp</dimen>
 </resources>

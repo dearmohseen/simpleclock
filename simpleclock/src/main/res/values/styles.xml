@@ -41,7 +41,7 @@
         <item name="android:textColorPrimary">@android:color/white</item>
         <item name="android:background">@color/colorGreen</item>
         <item name="android:solidColor">@android:color/white</item>
-        <item name="android:textSize">24sp</item>
+        <item name="android:textSize">@dimen/numberpicker_text_size</item>
         <item name="android:layout_height">50dp</item>
         <item name="android:height">50dp</item>
     </style>
