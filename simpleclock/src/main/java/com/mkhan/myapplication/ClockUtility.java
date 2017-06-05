@@ -75,38 +75,5 @@ import java.util.Locale;
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 
-    public static void playAlarmSound(final Context context) {
-        Uri alert = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
-        System.out.println(" ClockUtility playAlarmSound : " + alert);
-        if (alert == null) {
-            // alert is null, using backup
-            alert = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-
-            // I can't see this ever being null (as always have a default notification)
-            // but just incase
-            if (alert == null) {
-                // alert backup is null, using 2nd backup
-                alert = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
-            }
-        }
-
-        ringtone = RingtoneManager.getRingtone(context, alert);
-        ringtone.play();
-
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-        alertDialogBuilder.setMessage("Are you sure, You wanted to make decision");
-        alertDialogBuilder.setPositiveButton("yes",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        Toast.makeText(context, "You clicked yes button", Toast.LENGTH_LONG).show();
-                        ringtone.stop();
-                    }
-                });
-
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
-
-    }
 }
 

@@ -2,10 +2,17 @@ package com.mkhan.myapplication;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
+
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -15,6 +22,7 @@ import android.preference.PreferenceManager;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.TypedValue;
@@ -26,6 +34,7 @@ import android.widget.Chronometer;
 import android.widget.NumberPicker;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -67,6 +76,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        setTheme(R.style.AppTheme);
         setContentView(R.layout.activity_timer);
         initializeAdUnit();
         initializeComponents();
@@ -251,7 +261,8 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
 
             public void onFinish() {
                 txtTimerValue.setText("Times Up!");
-                ClockUtility.playAlarmSound(getBaseContext());
+
+                playAlarmSound(getBaseContext());
                 btnTimerPlay.setText(ClockUtility.START);
             }
         }.start();
@@ -368,8 +379,39 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    public Ringtone ringtone;
     public void prepareSharedPreference(){
         sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
     }
 
+    public void playAlarmSound(final Context context) {
+        Uri alert = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+        System.out.println(" ClockUtility playAlarmSound : " + alert);
+        if (alert == null) {
+            alert = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
+            if (alert == null) {
+                alert = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
+            }
+        }
+
+        ringtone = RingtoneManager.getRingtone(context, alert);
+        ringtone.play();
+
+        Intent intent = new Intent(this,TimerActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        this.startActivity(intent);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setPositiveButton("Dismiss", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                ringtone.stop();
+            }
+        });
+
+        builder.setMessage("Dismiss Alarm").setTitle("Times Up..");
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+    }
 }

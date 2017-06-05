@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.BatteryManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.constraint.ConstraintLayout;
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.AppTheme);
         setContentView(R.layout.activity_main);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
@@ -109,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
         btnStopWatch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("Mohseen btnStopWatch.onClick ");
+                //System.out.println("Mohseen btnStopWatch.onClick ");
                 startActivity(stopClockIntent);
             }
         });
@@ -154,9 +156,19 @@ public class MainActivity extends AppCompatActivity {
         Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
         // To count with Play market backstack, After pressing back button,
         // to taken back to our application, we need to add following flags to intent.
-        goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
+        if (Build.VERSION.SDK_INT >= 21) {
+            goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
+                    Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
+                    Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+        } else {
+            goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
+                    Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                    Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+        }
+
+/*        goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
                 Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
-                Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+                Intent.FLAG_ACTIVITY_MULTIPLE_TASK);*/
         try {
             startActivity(goToMarket);
         } catch (ActivityNotFoundException e) {
@@ -204,16 +216,16 @@ public class MainActivity extends AppCompatActivity {
         unregisterBatteryReceiver();
         mAdView1.pause();
         super.onPause();  // Always call the superclass method first
-        System.out.println("Mohseen On Pause ");
+        //System.out.println("Mohseen On Pause ");
     }
 
     private void unregisterBatteryReceiver(){
-        System.out.println("Mohseen unregisterBatteryReceiver " + mBatInfoReceiver);
+        //System.out.println("Mohseen unregisterBatteryReceiver " + mBatInfoReceiver);
         if(mBatInfoReceiver != null) {
             try {
                 unregisterReceiver(mBatInfoReceiver);
             } catch(Exception e){
-                Log.d(this.getLocalClassName(),"mBatInfoReceiver already unregistered " + e.getMessage());
+               // Log.d(this.getLocalClassName(),"mBatInfoReceiver already unregistered " + e.getMessage());
             }
 
         }
@@ -221,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onDestroy() {
-        System.out.println("Mohseen On onDestroy ");
+        //System.out.println("Mohseen On onDestroy ");
         super.onDestroy();
         unregisterBatteryReceiver();
         mAdView1.destroy();
@@ -231,7 +243,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onResume() {
-        System.out.println("Mohseen onResume ");
+        //System.out.println("Mohseen onResume ");
         super.onResume();  // Always call the superclass method first
         mAdView1.resume();
         updateBackgroundColor();
