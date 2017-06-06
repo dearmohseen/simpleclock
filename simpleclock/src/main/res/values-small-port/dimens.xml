@@ -9,4 +9,5 @@
     <dimen name="batteryText_textSize">18sp</dimen>
     <dimen name="constLayout_Day">153dp</dimen>
     <dimen name="numberpicker_text_size">24sp</dimen>
+    <dimen name="number_picker_height">120dp</dimen>
 </resources>

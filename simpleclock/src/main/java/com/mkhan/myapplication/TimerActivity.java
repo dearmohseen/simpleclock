@@ -29,9 +29,11 @@ import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -62,12 +64,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     NumberPicker numberPickerHour , numberPickerMinute , numberPickerSecond;
     private ProgressBar mProgress;
     private int mProgressStatus = 0;
-
-   // private Chronometer chronometer;
     private TextView txtTimerValue, txtHourLabel, txtMinuteLabel, txtSecondLabel;
-
-    public static boolean isTimerOn = false;
-    //long mLastStopTime;
 
     Button btnBackToMainClock , btnTimerPlay , btnTimerReset;
     CountDownTimer timer;
@@ -138,17 +135,14 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         btnTimerReset.setOnClickListener(this);
     }
 
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnTimerPlay:
                 //System.out.println("Mohseen " + SystemClock.elapsedRealtime());
-                isTimerOn = true;
                 togglePlayButtontext((Button) v);
                 break;
             case R.id.btnTimerReset:
-                isTimerOn = false;
                 togglePlayButtontext((Button) v);
                 break;
         }
@@ -265,7 +259,6 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
 
             public void onFinish() {
                 txtTimerValue.setText(R.string.timer_time_up);
-
                 playAlarmSound(getBaseContext());
                 btnTimerPlay.setText(ClockUtility.START);
             }
@@ -299,7 +292,6 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
 
         super.onRestoreInstanceState(savedInstanceState);
-
         txtTimerValue.setText(savedInstanceState.getString("timerValue"));
         hours = savedInstanceState.getInt("inputHour");
         numberPickerHour.setValue(hours);
@@ -317,7 +309,6 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
             timerResume();
         }
     }
-
 
     @Override
     public void onPause() {
@@ -341,14 +332,12 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         super.onResume();
         //System.out.println("Mohseen TimerActivity : onResume ");
         mAdView.resume();
-        //timerResume();
         updateBackgroundColor();
     }
 
 
     private void setTextSizes() {
-       // System.out.println("Mohseen : setTextSizes " + width + " : " + height);
-
+        System.out.println("Mohseen : setTextSizes " + width + " : " + height);
         if (config.orientation == 1) {
 
             if (width > 550 && height > 700) {
@@ -356,7 +345,6 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
                 final int widthInt = 120;
                 txtTimerValue.setTextSize(widthInt);
                 updateTextSize(size,widthInt);
-
             }
         } else {
 
@@ -421,7 +409,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     private void initializeAdUnit(){
         MobileAds.initialize(getApplicationContext(), getResources().getString(R.string.banner_ad_unit_id_1));
         mAdView = (AdView) findViewById(R.id.adView);
-        mAdView.setVisibility(View.GONE);
+        //mAdView.setVisibility(View.GONE);
 
         AdRequest adRequest = new AdRequest.Builder().build();
         adRequest.isTestDevice(this);

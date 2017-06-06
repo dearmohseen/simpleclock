@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
         MobileAds.initialize(getApplicationContext(), getResources().getString(R.string.banner_ad_unit_id_1));
         mAdView1 = (AdView) findViewById(R.id.adView1);
-        mAdView1.setVisibility(View.GONE);
+        //mAdView1.setVisibility(View.GONE);
 
         AdRequest adRequest = new AdRequest.Builder().build();
         adRequest.isTestDevice(this);
