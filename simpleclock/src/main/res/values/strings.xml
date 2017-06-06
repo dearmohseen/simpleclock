@@ -46,4 +46,5 @@
     <string name="start_label">Start</string>
     <string name="reset_label">Reset</string>
     <string name="timer_time_up">Times Up!</string>
+    <string name="lap_label">Lap</string>
 </resources>

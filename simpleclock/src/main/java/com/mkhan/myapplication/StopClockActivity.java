@@ -1,10 +1,13 @@
 package com.mkhan.myapplication;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.preference.PreferenceManager;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -46,7 +49,7 @@ public class StopClockActivity extends AppCompatActivity {
     ArrayAdapter<String> adapter ;
     private Configuration config;
     private int width , height;
-
+    public SharedPreferences sharedPref;
 
     TextView listInnerTextView;
 
@@ -57,11 +60,8 @@ public class StopClockActivity extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
 //        System.out.println("Mohseen : stopwatch " + savedInstanceState);
-
         int display_mode = getResources().getConfiguration().orientation;
 
-
-        //if(savedInstanceState == null){
         config = getResources().getConfiguration();
         width = config.screenWidthDp;
         height = config.screenHeightDp;
@@ -80,6 +80,8 @@ public class StopClockActivity extends AppCompatActivity {
         listInnerTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP,25);
         listInnerTextView.setGravity(Gravity.CENTER);
         setTextSizes();
+        prepareSharedPreference();
+        updateBackgroundColor();
     }
 
     @Override
@@ -317,5 +319,38 @@ public class StopClockActivity extends AppCompatActivity {
                 btnStopWatchReset.setTextSize(size);
             }
         }
+    }
+
+    @Override
+    public void onResume() {
+        //System.out.println("Mohseen onResume ");
+        super.onResume();
+        updateBackgroundColor();
+    }
+
+    private void updateBackgroundColor(){
+        String color = sharedPref.getString(getString(R.string.pref_background_color),"#000000");
+        ViewGroup mainStopwatchtLayout = (ViewGroup) findViewById(R.id.mainStopwatchtLayout);
+        GradientDrawable gd = (GradientDrawable) mainStopwatchtLayout.getBackground();
+        gd.setColor(Color.parseColor(color));
+        int width_px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, getResources().getDisplayMetrics());
+
+        GradientDrawable gdList = (GradientDrawable) listView.getBackground();
+        gdList.setColor(Color.parseColor(color));
+
+        if("#000000".equalsIgnoreCase(color)){
+            gd.setStroke(width_px, Color.WHITE);
+            gdList.setStroke(width_px, Color.WHITE);
+        } else {
+            gd.setStroke(width_px, Color.BLACK);
+            gdList.setStroke(width_px, Color.WHITE);
+        }
+
+
+
+    }
+
+    public void prepareSharedPreference(){
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
     }
 }

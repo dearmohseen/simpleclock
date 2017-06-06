@@ -256,7 +256,7 @@ public class MainActivity extends AppCompatActivity {
             //plugged = 0;
             //level = 100;
             if(plugged > 0 ){//battery is charging
-                System.out.println("Battery is Charging : "  +  plugged);
+                //System.out.println("Battery is Charging : "  +  plugged);
                 batteryImage.setImageResource(R.drawable.ic_battery_charging);
             } else {
                 if(level > 90 ){

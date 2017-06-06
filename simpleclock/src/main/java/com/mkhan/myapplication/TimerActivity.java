@@ -143,7 +143,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnTimerPlay:
-                System.out.println("Mohseen " + SystemClock.elapsedRealtime());
+                //System.out.println("Mohseen " + SystemClock.elapsedRealtime());
                 isTimerOn = true;
                 togglePlayButtontext((Button) v);
                 break;
@@ -232,7 +232,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
-        System.out.println("onCreateOptionsMenu : " + actionBar );
+        //System.out.println("onCreateOptionsMenu : " + actionBar );
 
         if (actionBar != null) {
             actionBar.setHomeButtonEnabled(false);      // Disable the button
@@ -347,7 +347,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
 
 
     private void setTextSizes() {
-        System.out.println("Mohseen : setTextSizes " + width + " : " + height);
+       // System.out.println("Mohseen : setTextSizes " + width + " : " + height);
 
         if (config.orientation == 1) {
 
@@ -360,7 +360,12 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
             }
         } else {
 
-                if (width < 430 && height < 300) {
+            if (width > 500 && height < 300) {
+                final int size = 20;
+                final int widthInt = 70;
+                txtTimerValue.setTextSize(50);
+                updateTextSize(size,widthInt);
+            } else if (width < 430 && height < 300) {
                     final int size = 20;
                     final int widthInt = 70;
                     txtTimerValue.setTextSize(50);
@@ -390,9 +395,9 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         btnTimerPlay.setTextSize(size);
         btnTimerReset.setTextSize(size);
 
-        numberPickerHour.getLayoutParams().height = 3*widthInt ;
+        /*numberPickerHour.getLayoutParams().height = 3*widthInt ;
         numberPickerMinute.getLayoutParams().height = 3*widthInt;
-        numberPickerSecond.getLayoutParams().height = 3*widthInt;
+        numberPickerSecond.getLayoutParams().height = 3*widthInt;*/
 
         btnBackToMainClock.getLayoutParams().width = widthInt;
         btnTimerPlay.getLayoutParams().width = widthInt;
@@ -432,7 +437,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
 
     public void playAlarmSound(final Context context) {
         Uri alert = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
-        System.out.println(" ClockUtility playAlarmSound : " + alert);
+        //System.out.println(" ClockUtility playAlarmSound : " + alert);
         if (alert == null) {
             alert = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
