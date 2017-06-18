@@ -2,12 +2,14 @@
 <resources>
     <dimen name="textClock_textSize">180sp</dimen>
     <dimen name="textClockSec_textSize">40sp</dimen>
-    <dimen name="textClockAM_textSize">40sp</dimen>
-    <dimen name="textClockDay_textSize">60sp</dimen>
-    <dimen name="textClockDate_textSize">28sp</dimen>
+    <dimen name="textClockAM_textSize">34sp</dimen>
+    <dimen name="textClockDay_textSize">40sp</dimen>
+    <dimen name="textClockDate_textSize">24sp</dimen>
     <dimen name="battery_ImgSize">80dp</dimen>
     <dimen name="batteryText_textSize">40sp</dimen>
     <dimen name="constLayout_Day">372dp</dimen>
     <dimen name="numberpicker_text_size">32sp</dimen>
     <dimen name="number_picker_height">200dp</dimen>
+    <dimen name="circlebar_width_height">125dp</dimen>
+    <dimen name="stopwatch_padding">16dp</dimen>
 </resources>

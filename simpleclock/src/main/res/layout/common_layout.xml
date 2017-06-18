@@ -19,10 +19,13 @@
         ads:adSize="BANNER"
         ads:adUnitId="@string/banner_ad_unit_id_1"
         tools:layout_constraintTop_creator="1"
-        android:layout_marginStart="2dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
         tools:layout_constraintLeft_creator="1"
         ads:layout_constraintLeft_toLeftOf="parent"
-        ads:layout_constraintTop_toTopOf="parent" />
+        ads:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp" />
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -95,7 +98,10 @@
         ads:layout_constraintTop_toBottomOf="@+id/textClockAM"
         android:id="@+id/constraintLayout2"
         android:layout_marginLeft="8dp"
-        ads:layout_constraintLeft_toLeftOf="parent">
+        ads:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginBottom="16dp"
+        ads:layout_constraintBottom_toTopOf="@+id/btnStopWatch"
+        ads:layout_constraintVertical_bias="0.533">
 
         <TextView
             android:id="@+id/textViewDay"
@@ -104,20 +110,17 @@
             android:layout_marginEnd="8dp"
             android:layout_marginLeft="0dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="0dp"
             android:clickable="true"
             style="@style/myTextStyle"
             android:text="@string/saturday"
             android:textAlignment="viewStart"
             android:textSize="@dimen/textClockDay_textSize"
-            ads:layout_constraintLeft_toLeftOf="parent"
-            ads:layout_constraintTop_toTopOf="parent" />
+            ads:layout_constraintLeft_toLeftOf="parent" />
 
         <TextView
             android:id="@+id/textViewDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="0dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="0dp"
@@ -126,41 +129,23 @@
             style="@style/myTextStyle"
             android:textSize="@dimen/textClockDate_textSize"
 
-            ads:layout_constraintBottom_toBottomOf="parent"
             ads:layout_constraintTop_toBottomOf="@+id/textViewDay"
-            ads:layout_constraintVertical_bias="0.0"
             android:layout_marginLeft="8dp"
             ads:layout_constraintLeft_toLeftOf="parent" />
 
 
     </android.support.constraint.ConstraintLayout>
 
-    <ImageView
-        android:id="@+id/batteryImage"
-        android:layout_width="@dimen/battery_ImgSize"
-        android:layout_height="@dimen/battery_ImgSize"
-        android:visibility="visible"
-        ads:layout_constraintTop_toTopOf="@+id/batteryText"
-        ads:layout_constraintRight_toLeftOf="@+id/batteryText"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="0dp"
-        ads:layout_constraintBottom_toBottomOf="@+id/batteryText"
-        android:layout_marginBottom="0dp" />
-
-    <TextView
-        android:id="@+id/batteryText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="100 %"
-        style="@style/myTextStyle"
-        android:textSize="@dimen/batteryText_textSize"
-
+    <com.mkhan.myapplication.CircleProgress
+        android:id="@+id/circleProgress"
+        android:layout_width="@dimen/circlebar_width_height"
+        android:layout_height="@dimen/circlebar_width_height"
         android:layout_marginRight="16dp"
+        ads:circle_finished_color="@color/colorGreen"
+        ads:circle_text_size="@dimen/textClockAM_textSize"
         ads:layout_constraintRight_toRightOf="parent"
-        ads:layout_constraintBottom_toBottomOf="@+id/btnStopWatch"
-        android:layout_marginBottom="0dp"
-        ads:layout_constraintTop_toTopOf="@+id/btnStopWatch"
-        android:layout_marginTop="0dp" />
+        ads:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="16dp" />
 
     <Button
         android:id="@+id/btnStopWatch"
@@ -168,20 +153,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:paddingRight="16dp"
-        android:paddingLeft="16dp"
+        android:layout_marginLeft="8dp"
+        android:padding="@dimen/stopwatch_padding"
         android:text="Stopwatch"
         android:textAlignment="center"
-        android:textSize="24sp"
+        android:textSize="@dimen/textClockAM_textSize"
         android:textStyle="normal"
-        ads:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginLeft="8dp"
+        ads:layout_constraintBottom_toBottomOf="@+id/circleProgress"
         ads:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="8dp"
-        ads:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
-        ads:layout_constraintVertical_bias="0.68" />
+        ads:layout_constraintTop_toTopOf="@+id/circleProgress"
+        android:layout_marginTop="8dp" />
 
 
 </android.support.constraint.ConstraintLayout>

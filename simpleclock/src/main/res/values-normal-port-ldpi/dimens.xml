@@ -5,13 +5,11 @@
 Refer to App Widget Documentation for margin information
 http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
     -->
-    <dimen name="textClock_textSize">120sp</dimen>
-    <dimen name="textClockSec_textSize">20sp</dimen>
-    <dimen name="textClockAM_textSize">20sp</dimen>
-    <dimen name="textClockDay_textSize">28sp</dimen>
-    <dimen name="textClockDate_textSize">18sp</dimen>
-    <dimen name="battery_ImgSize">60dp</dimen>
-    <dimen name="batteryText_textSize">18sp</dimen>
+    <dimen name="textClock_textSize">100sp</dimen>
+    <dimen name="textClockSec_textSize">24sp</dimen>
+    <dimen name="textClockAM_textSize">18sp</dimen>
+    <dimen name="textClockDay_textSize">24sp</dimen>
+    <dimen name="textClockDate_textSize">16sp</dimen>
     <dimen name="constLayout_Day">230dp</dimen>
     <dimen name="margin_to_reset_btn">20dp</dimen>
 

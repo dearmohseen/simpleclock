@@ -29,8 +29,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 
 public class MainActivity extends AppCompatActivity {
@@ -43,30 +45,31 @@ public class MainActivity extends AppCompatActivity {
     private ToggleButton toggleButtonSecond;
     private Configuration config;
     private int width , height;
-    private String tag;
+
     private IntentFilter batteryFilter;
     private Intent batteryStatusIntent;
-    private TextView  batteryText;
+
     boolean chargingStatus;
-    private ImageView batteryImage;
     private Button btnStopWatch;
     private Intent stopClockIntent;
 
     AdView mAdView1;
+    private InterstitialAd mInterstitialAd;
     public SharedPreferences sharedPref;
+
+    private CircleProgress circleProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme(R.style.AppTheme);
         setContentView(R.layout.activity_main);
+        onNewIntent(getIntent());
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         config = getResources().getConfiguration();
         width = config.screenWidthDp;
         height = config.screenHeightDp;
-        tag = (String)findViewById(R.id.topMostLayout).getTag();
-//        System.out.println("Mohseen : tag : " + findViewById(R.id.topMostLayout).getTag());
 
         textClock = (TextClock) findViewById(R.id.textClock);
 
@@ -93,15 +96,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        MobileAds.initialize(getApplicationContext(), getResources().getString(R.string.banner_ad_unit_id_1));
-        mAdView1 = (AdView) findViewById(R.id.adView1);
-        //mAdView1.setVisibility(View.GONE);
-
-        AdRequest adRequest = new AdRequest.Builder().build();
-        adRequest.isTestDevice(this);
-        mAdView1.loadAd(adRequest);
-
-        setTextSizes();
+        initializeAdUnit();
+        //setTextSizes();
 
         initializeBattery();
 
@@ -118,6 +114,41 @@ public class MainActivity extends AppCompatActivity {
 
         prepareSharedPreference();
         updateBackgroundColor();
+    }
+
+    private void initializeAdUnit() {
+        MobileAds.initialize(getApplicationContext(), getResources().getString(R.string.banner_ad_unit_id_1));
+        mAdView1 = (AdView) findViewById(R.id.adView1);
+        //mAdView1.setVisibility(View.GONE);
+
+        AdRequest adRequest = new AdRequest.Builder().build();
+        //adRequest.isTestDevice(this);
+        mAdView1.loadAd(adRequest);
+
+        mInterstitialAd = new InterstitialAd(this);
+        //Test ad unit -- ca-app-pub-3940256099942544/1033173712
+        //mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+
+        mInterstitialAd.setAdUnitId(getString(R.string.interestial_ad_unit));
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+            }
+        });
+
+    }
+
+    protected void onNewIntent(Intent intent) {
+        String action = intent.getAction();
+        String data = intent.getDataString();
+        if (Intent.ACTION_VIEW.equals(action) && data != null) {
+            String path = data.substring(data.lastIndexOf("/") + 1);
+            if("stopwatch".equalsIgnoreCase(path)){
+                startActivity(stopClockIntent);
+            }
+        }
     }
 
     @Override
@@ -175,8 +206,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void setTextSizes(){
-        //System.out.println("Mohseen : setTextSizes " + width + " : " +height);
+/*    private void setTextSizes(){
+        System.out.println("Mohseen : setTextSizes " + width + " : " +height + " :: " + config.densityDpi + " :: "
+                + getResources().getDisplayMetrics().density );
 
         if(config.orientation == 1) {
 
@@ -190,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
-    }
+    }*/
 
     public void openCalendarApp(){
         //Toast.makeText(getBaseContext(),"Opening Calendar", Toast.LENGTH_SHORT).show();
@@ -201,11 +233,7 @@ public class MainActivity extends AppCompatActivity {
     private void initializeBattery(){
         batteryFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
         batteryStatusIntent = getBaseContext().registerReceiver(mBatInfoReceiver, batteryFilter);
-        batteryText = (TextView) findViewById(R.id.batteryText);
-
-        batteryImage = (ImageView) findViewById(R.id.batteryImage);
-        batteryImage.setMaxWidth(batteryText.getWidth());
-        batteryImage.setMaxHeight(batteryText.getHeight());
+        circleProgress = (CircleProgress) findViewById(R.id.circleProgress);
     }
 
     @Override
@@ -243,6 +271,9 @@ public class MainActivity extends AppCompatActivity {
         //System.out.println("Mohseen onResume ");
         super.onResume();  // Always call the superclass method first
         mAdView1.resume();
+        if (mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
+        }
         updateBackgroundColor();
         registerReceiver(mBatInfoReceiver, batteryFilter);
     }
@@ -253,26 +284,8 @@ public class MainActivity extends AppCompatActivity {
 
             int  level= intent.getIntExtra(BatteryManager.EXTRA_LEVEL,0);
             int  plugged= intent.getIntExtra(BatteryManager.EXTRA_PLUGGED,0);
-            //plugged = 0;
-            //level = 100;
-            if(plugged > 0 ){//battery is charging
-                //System.out.println("Battery is Charging : "  +  plugged);
-                batteryImage.setImageResource(R.drawable.ic_battery_charging);
-            } else {
-                if(level > 90 ){
-                    batteryImage.setImageResource(R.drawable.ic_battery_full);
-                } else if(level >= 70 && level <= 90){
-                    batteryImage.setImageResource(R.drawable.ic_battery_80);
-                } else if(level >= 50 && level < 70){
-                    batteryImage.setImageResource(R.drawable.ic_battery_60);
-                } else if(level >= 30 && level < 50){
-                    batteryImage.setImageResource(R.drawable.ic_battery_40);
-                } else if(level < 30){
-                    batteryImage.setImageResource(R.drawable.ic_battery_20);
-                }
-            }
 
-            batteryText.setText(level + " %");
+            circleProgress.setProgress(level);
 
         }
     };

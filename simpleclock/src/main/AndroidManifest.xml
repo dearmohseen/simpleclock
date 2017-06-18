@@ -22,6 +22,15 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter android:label="@string/app_name" android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- Accepts URIs that begin with "http://recipe-app.com/recipe" -->
+                <data android:scheme="http"
+                    android:host="androiddigitalclock.blogspot.com"
+                    android:pathPrefix="/home" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".TimerActivity"
@@ -31,6 +40,15 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
+            <intent-filter android:label="@string/app_name" android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- Accepts URIs that begin with "http://recipe-app.com/recipe" -->
+                <data android:scheme="http"
+                    android:host="androiddigitalclock.blogspot.com"
+                    android:pathPrefix="/timer" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".StopClockActivity"
@@ -40,6 +58,15 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
+            <intent-filter android:label="@string/app_name" android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- Accepts URIs that begin with "http://recipe-app.com/recipe" -->
+                <data android:scheme="http"
+                    android:host="androiddigitalclock.blogspot.com"
+                    android:pathPrefix="/stopwatch" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".SettingsActivity"

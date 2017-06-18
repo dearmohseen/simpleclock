@@ -15,8 +15,8 @@ android {
         applicationId "com.mkhan.myapplication"
         minSdkVersion 17
         targetSdkVersion 25
-        versionCode 16
-        versionName "3.0"
+        versionCode 17
+        versionName "3.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.config
         vectorDrawables.useSupportLibrary = true
@@ -43,8 +43,8 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.google.firebase:firebase-ads:10.2.1'
-    compile 'com.google.firebase:firebase-appindexing:10.2.1'
+    compile 'com.google.firebase:firebase-ads:10.2.6'
+    compile 'com.google.firebase:firebase-appindexing:10.2.6'
     compile 'com.google.android.gms:play-services-ads:10.2.1'
     compile 'com.android.support:support-v4:25.3.1'
     compile 'com.android.support:support-vector-drawable:25.3.1'

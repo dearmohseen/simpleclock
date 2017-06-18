@@ -39,8 +39,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.common.SignInButton;
 
@@ -70,6 +72,7 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
     CountDownTimer timer;
     long milliLeft,timerHour, timerMinute , timerSec;
     StringBuilder sbTextValue = new StringBuilder();
+
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -416,6 +419,10 @@ public class TimerActivity extends AppCompatActivity implements View.OnClickList
         if(mAdView != null) {
             mAdView.loadAd(adRequest);
         }
+
+
+
+
     }
 
     public Ringtone ringtone;
