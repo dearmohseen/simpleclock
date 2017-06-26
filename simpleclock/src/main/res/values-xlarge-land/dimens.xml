@@ -11,4 +11,5 @@
     <dimen name="numberpicker_text_size">40sp</dimen>
     <dimen name="circlebar_width_height">130dp</dimen>
     <dimen name="stopwatch_padding">16dp</dimen>
+    <dimen name="stopwatch_padding_vertical">8dp</dimen>
 </resources>

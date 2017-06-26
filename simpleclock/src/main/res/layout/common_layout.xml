@@ -25,7 +25,9 @@
         ads:layout_constraintLeft_toLeftOf="parent"
         ads:layout_constraintTop_toTopOf="parent"
         android:layout_marginLeft="0dp"
-        android:layout_marginTop="0dp" />
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="0dp"
+        ads:layout_constraintRight_toRightOf="parent" />
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -117,35 +119,37 @@
             android:textSize="@dimen/textClockDay_textSize"
             ads:layout_constraintLeft_toLeftOf="parent" />
 
-        <TextView
-            android:id="@+id/textViewDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="0dp"
-            android:text="@string/date_constant"
-            android:textAlignment="center"
-            style="@style/myTextStyle"
-            android:textSize="@dimen/textClockDate_textSize"
-
-            ads:layout_constraintTop_toBottomOf="@+id/textViewDay"
-            android:layout_marginLeft="8dp"
-            ads:layout_constraintLeft_toLeftOf="parent" />
-
 
     </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/textViewDate"
+        style="@style/myTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/date_constant"
+        android:textAlignment="center"
+
+        android:textSize="@dimen/textClockDate_textSize"
+        ads:layout_constraintTop_toTopOf="@+id/constraintLayout2"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+        ads:layout_constraintRight_toRightOf="parent" />
 
     <com.mkhan.myapplication.CircleProgress
         android:id="@+id/circleProgress"
         android:layout_width="@dimen/circlebar_width_height"
         android:layout_height="@dimen/circlebar_width_height"
-        android:layout_marginRight="16dp"
+        android:layout_marginRight="0dp"
         ads:circle_finished_color="@color/colorGreen"
         ads:circle_text_size="@dimen/textClockAM_textSize"
-        ads:layout_constraintRight_toRightOf="parent"
+        ads:layout_constraintRight_toRightOf="@+id/textViewDate"
         ads:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="0dp"
+        ads:layout_constraintLeft_toLeftOf="@+id/textViewDate" />
 
     <Button
         android:id="@+id/btnStopWatch"
@@ -154,7 +158,10 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
-        android:padding="@dimen/stopwatch_padding"
+        android:paddingStart="@dimen/stopwatch_padding"
+        android:paddingEnd="@dimen/stopwatch_padding"
+        android:paddingTop="@dimen/stopwatch_padding_vertical"
+        android:paddingBottom="@dimen/stopwatch_padding_vertical"
         android:text="Stopwatch"
         android:textAlignment="center"
         android:textSize="@dimen/textClockAM_textSize"

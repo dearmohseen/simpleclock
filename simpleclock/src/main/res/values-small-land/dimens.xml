@@ -12,4 +12,5 @@
     <dimen name="number_picker_height">120dp</dimen>
     <dimen name="circlebar_width_height">50dp</dimen>
     <dimen name="stopwatch_padding">10dp</dimen>
+    <dimen name="stopwatch_padding_vertical">5dp</dimen>
 </resources>
