@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
     private IntentFilter batteryFilter;
     private Intent batteryStatusIntent;
 
-    boolean chargingStatus;
     private Button btnStopWatch;
     private Intent stopClockIntent;
 
@@ -252,7 +251,6 @@ public class MainActivity extends AppCompatActivity {
             } catch(Exception e){
                // Log.d(this.getLocalClassName(),"mBatInfoReceiver already unregistered " + e.getMessage());
             }
-
         }
     }
 
@@ -263,12 +261,13 @@ public class MainActivity extends AppCompatActivity {
         unregisterBatteryReceiver();
         mAdView1.destroy();
           // Always call the superclass method first
-
     }
 
     @Override
     public void onResume() {
         //System.out.println("Mohseen onResume ");
+        System.out.println("Mohseen : setTextSizes " + width + " : " +height + " :: " + config.densityDpi + " :: "
+                + getResources().getDisplayMetrics().density + " Value : " + R.dimen.textClock_textSize );
         super.onResume();  // Always call the superclass method first
         mAdView1.resume();
         if (mInterstitialAd.isLoaded()) {
@@ -281,12 +280,10 @@ public class MainActivity extends AppCompatActivity {
     private BroadcastReceiver mBatInfoReceiver = new BroadcastReceiver(){
         @Override
         public void onReceive(Context ctxt, Intent intent) {
-
             int  level= intent.getIntExtra(BatteryManager.EXTRA_LEVEL,0);
             int  plugged= intent.getIntExtra(BatteryManager.EXTRA_PLUGGED,0);
 
             circleProgress.setProgress(level);
-
         }
     };
 
