@@ -34,7 +34,7 @@
 
     <!-- Example settings for Notifications -->
 
-    <string name="appwidget_text">EXAMPLE</string>
+    <string name="appwidget_text">Digital Clock</string>
     <string name="pref_background_color">pref_background_color</string>
     <string name="pref_text_color_title">Dark Text</string>
     <string name="pref_text_color">pref_text_color</string>
@@ -48,4 +48,5 @@
     <string name="timer_time_up">Times Up!</string>
     <string name="lap_label">Lap</string>
     <string name="interestial_ad_unit">ca-app-pub-1322448895447717/9973408784</string>
+    <string name="add_widget">Add widget</string>
 </resources>

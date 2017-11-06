@@ -10,6 +10,12 @@
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_timer_black_24dp"/>
     <item
+        android:id="@+id/menu_item_share"
+        app:showAsAction="ifRoom"
+        android:title="Share"
+        app:actionProviderClass="android.support.v7.widget.ShareActionProvider" />
+
+    <item
         android:id="@+id/action_settings"
         android:orderInCategory="2"
         android:title="Settings"

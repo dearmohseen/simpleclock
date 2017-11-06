@@ -2,6 +2,7 @@
 
 <resources>
     <dimen name="textClock_textSize">180sp</dimen>
+    <dimen name="widget_textSize">150sp</dimen>
     <dimen name="textClockSec_textSize">40sp</dimen>
     <dimen name="textClockAM_textSize">28sp</dimen>
     <dimen name="textClockDay_textSize">40sp</dimen>

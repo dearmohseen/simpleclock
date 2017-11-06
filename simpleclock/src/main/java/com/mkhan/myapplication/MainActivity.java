@@ -15,7 +15,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.ShareActionProvider;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
@@ -23,10 +25,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextClock;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.google.android.gms.ads.AdListener;
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     AdView mAdView1;
     private InterstitialAd mInterstitialAd;
     public SharedPreferences sharedPref;
-
+    private ShareActionProvider mShareActionProvider;
     private CircleProgress circleProgress;
 
     @Override
@@ -96,8 +96,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         initializeAdUnit();
-        //setTextSizes();
-
         initializeBattery();
 
         stopClockIntent = new Intent(getApplicationContext(), StopClockActivity.class);
@@ -110,6 +108,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(stopClockIntent);
             }
         });
+
+        setTextSizes();
 
         prepareSharedPreference();
         updateBackgroundColor();
@@ -150,11 +150,36 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+/*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+*/
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        MenuItem item=menu.findItem(R.id.menu_item_share  );
+        mShareActionProvider=(ShareActionProvider) MenuItemCompat.getActionProvider(item);
+        //System.out.println(" onCreateOptionsMenu : mShareActionProvider " + mShareActionProvider);
+
+        if(mShareActionProvider != null) {
+            mShareActionProvider.setShareIntent(createShareForecastIntent());
+        }
+        return true;
+    }
+
+    private Intent createShareForecastIntent() {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, Utility.APP_STORE_URL + this.getPackageName());
+        return shareIntent;
     }
 
     @Override
@@ -165,6 +190,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_rate_app:
                 //System.out.println("Mohseen : Rate App Clicked ");
                 rateApp();
+                return true;
+            case R.id.menu_item_share:
+                //System.out.println("Mohseen : Action setting Clicked ");
+                this.startActivity(new Intent(this,SettingsActivity.class));
                 return true;
             case R.id.action_settings:
                 //System.out.println("Mohseen : Action setting Clicked ");
@@ -205,23 +234,84 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-/*    private void setTextSizes(){
-        System.out.println("Mohseen : setTextSizes " + width + " : " +height + " :: " + config.densityDpi + " :: "
+   private void setTextSizes(){
+
+/*
+       System.out.println("Mohseen Screen : setTextSizes " + width + " : " +height + " :: " + config.densityDpi + " :: "
                 + getResources().getDisplayMetrics().density );
+*/
 
-        if(config.orientation == 1) {
+       if ((config.screenLayout &Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_LARGE)
+       {
+           Log.d("Screen Size: ", "LARGE");
+           if(config.orientation == 1) {
+                if(width >= 480 && width <= 500) {
+                       textClock.setTextSize(140);
+                       textViewDay.setTextSize(38);
+                       textClockAM.setTextSize(32);
+                       /*textClockSeconds.setTextSize(28);
+                       textViewDate.setTextSize(24);*/
+                       btnStopWatch.setTextSize(28);
+                       circleProgress.getLayoutParams().width = 110;
+                    circleProgress.getLayoutParams().height = 110;
+                   }
+           }
+       }
+       else if ((getResources().getConfiguration().screenLayout &      Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_NORMAL) {
+           int density = config.densityDpi;
+           Log.d("Screen Size: ", "NORMAL : " + density);
+           //DisplayMetrics.DENSITY_HIGH;
+           if(config.orientation == 1) {
 
-            if(tag.equalsIgnoreCase("normal")){
-                if(width > 375) {
-                    textClock.setTextSize(130);
-                    textViewDay.setTextSize(44);
-                    textClockAM.setTextSize(28);
-                    textClockSeconds.setTextSize(28);
-                    textViewDate.setTextSize(24);
-                }
-            }
-        }
-    }*/
+               if(width >= 360 && density > 320) {
+                   Log.d("screen textClock: ", String.valueOf(textClock.getTextSize()));
+                   textClock.setTextSize(TypedValue.COMPLEX_UNIT_SP,100);
+                   textViewDay.setTextSize(TypedValue.COMPLEX_UNIT_SP,24);
+                   textClockAM.setTextSize(TypedValue.COMPLEX_UNIT_SP,28);
+                   textClockSeconds.setTextSize(TypedValue.COMPLEX_UNIT_SP,28);
+                   textViewDate.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
+                   btnStopWatch.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
+                   circleProgress.getLayoutParams().width = 200;
+                   circleProgress.getLayoutParams().height = 200;
+               }
+           }
+       }
+       /*else if ((getResources().getConfiguration().screenLayout &      Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_SMALL) {
+           Log.d("Screen Size: ", "SMALL");
+       }
+       else if ((getResources().getConfiguration().screenLayout &      Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE) {
+           Log.d("Screen Size: ", "XLARGE");
+       }
+       else {
+           Log.d("Screen Size: ","UNKNOWN_CATEGORY_SCREEN_SIZE");
+       }*/
+
+       //Determine density
+       /*DisplayMetrics metrics = new DisplayMetrics();
+       getWindowManager().getDefaultDisplay().getMetrics(metrics);
+       int density = metrics.densityDpi;
+
+       if (density==DisplayMetrics.DENSITY_HIGH) {
+           Log.d("Screen Density: ","HIGH");
+       }
+       else if (density==DisplayMetrics.DENSITY_MEDIUM) {
+           Log.d("Screen Density: ","MEDIUM");
+       }
+       else if (density==DisplayMetrics.DENSITY_LOW) {
+           Log.d("Screen Density: ","LOW");
+       }
+       else if (density== DisplayMetrics.DENSITY_XHIGH) {
+           Log.d("Screen Density: ","XHIGH");
+       }
+       else if (density==DisplayMetrics.DENSITY_XXHIGH) {
+           Log.d("Screen Density: ","XXHIGH");
+       }
+       else {
+           Log.d("Screen Density: ","UNKNOWN_CATEGORY");
+       }*/
+       //System.out.println("Mohseen : setTextSizes layoutSize " + layoutSize  );
+
+    }
 
     public void openCalendarApp(){
         //Toast.makeText(getBaseContext(),"Opening Calendar", Toast.LENGTH_SHORT).show();

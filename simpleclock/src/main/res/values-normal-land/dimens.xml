@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="textClock_textSize">120sp</dimen>
+    <dimen name="widget_textSize">100sp</dimen>
     <dimen name="textClockSec_textSize">20sp</dimen>
     <dimen name="textClockAM_textSize">20sp</dimen>
     <dimen name="textClockDay_textSize">28sp</dimen>

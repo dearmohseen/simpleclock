@@ -1,13 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mkhan.myapplication">
+
     <uses-sdk android:minSdkVersion="11" />
+
     <supports-screens
         android:anyDensity="true"
         android:largeScreens="true"
         android:normalScreens="true"
         android:smallScreens="true"
         android:xlargeScreens="true" />
+
+    <compatible-screens>
+                <!-- all small size screens -->
+                <screen android:screenSize="small" android:screenDensity="ldpi" />
+                <screen android:screenSize="small" android:screenDensity="mdpi" />
+                <screen android:screenSize="small" android:screenDensity="hdpi" />
+                <screen android:screenSize="small" android:screenDensity="xhdpi" />
+                <screen android:screenSize="small" android:screenDensity="xxhdpi" />
+                <screen android:screenSize="small" android:screenDensity="xxxhdpi" />
+                <!-- all normal size screens -->
+                <screen android:screenSize="normal" android:screenDensity="ldpi" />
+                <screen android:screenSize="normal" android:screenDensity="mdpi" />
+                <screen android:screenSize="normal" android:screenDensity="hdpi" />
+                <screen android:screenSize="normal" android:screenDensity="xhdpi" />
+                <screen android:screenSize="normal" android:screenDensity="xxhdpi" />
+                <screen android:screenSize="normal" android:screenDensity="xxxhdpi" />
+    </compatible-screens>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--<uses-permission android:name="android.permission.READ_PHONE_STATE" />-->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="false"
@@ -16,76 +38,92 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity" android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <intent-filter android:label="@string/app_name" android:autoVerify="true">
+            <intent-filter
+                android:autoVerify="true"
+                android:label="@string/app_name">
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <!-- Accepts URIs that begin with "http://recipe-app.com/recipe" -->
-                <data android:scheme="http"
+                <data
                     android:host="androiddigitalclock.blogspot.com"
-                    android:pathPrefix="/home" />
+                    android:pathPrefix="/home"
+                    android:scheme="http" />
             </intent-filter>
         </activity>
         <activity
             android:name=".TimerActivity"
             android:label="@string/title_timer"
-            android:theme="@style/AppTheme"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
-            <intent-filter android:label="@string/app_name" android:autoVerify="true">
+
+            <intent-filter
+                android:autoVerify="true"
+                android:label="@string/app_name">
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <!-- Accepts URIs that begin with "http://recipe-app.com/recipe" -->
-                <data android:scheme="http"
+                <data
                     android:host="androiddigitalclock.blogspot.com"
-                    android:pathPrefix="/timer" />
+                    android:pathPrefix="/timer"
+                    android:scheme="http" />
             </intent-filter>
         </activity>
         <activity
             android:name=".StopClockActivity"
             android:label="@string/title_stopwatch"
-            android:theme="@style/AppTheme"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
-            <intent-filter android:label="@string/app_name" android:autoVerify="true">
+
+            <intent-filter
+                android:autoVerify="true"
+                android:label="@string/app_name">
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <!-- Accepts URIs that begin with "http://recipe-app.com/recipe" -->
-                <data android:scheme="http"
+                <data
                     android:host="androiddigitalclock.blogspot.com"
-                    android:pathPrefix="/stopwatch" />
+                    android:pathPrefix="/stopwatch"
+                    android:scheme="http" />
             </intent-filter>
         </activity>
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:theme="@style/AppTheme"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mkhan.myapplication.MainActivity" />
         </activity>
 
-        <receiver android:name=".DigitalClockWidget">
+        <receiver android:name=".ClockWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/digital_clock_widget_info" />
+                android:resource="@xml/clock_widget_info" />
         </receiver>
     </application>
 
